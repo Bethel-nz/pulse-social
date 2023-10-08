@@ -10,3 +10,52 @@ datasource db {
   url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
+
+model User {
+  id       String    @id @default(uuid())
+  name     String?
+  email    String?   @unique
+  image    String?
+  posts    Post[]
+  comments Comment[]
+  hearts   Heart[]
+  role     String // Add a role field for user roles (ADMIN or BASIC)
+}
+
+model Post {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  title     String
+  published Boolean   @default(false)
+  userId    String
+  user      User      @relation(fields: [userId], references: [id])
+  comments  Comment[]
+  hearts    Heart[]
+
+  @@index([userId])
+}
+
+model Heart {
+  id     String @id @default(uuid())
+  postId String
+  userId String
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([postId])
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id])
+  title     String
+  postId    String
+  userId    String
+  createdAt DateTime @default(now())
+
+  @@index([postId])
+  @@index([userId])
+}
