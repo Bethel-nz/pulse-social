@@ -1,7 +1,7 @@
 'use client';
 import { useState, FormEvent, ChangeEvent } from 'react';
 import { signIn } from 'next-auth/react';
-import LoadingDots from '@/components/loading-dots';
+import LoadingDots from '@/components/loading-dots/loading-dots';
 import toast from 'react-hot-toast';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -48,8 +48,9 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 					email,
 					password,
 					redirect: false,
+					callbackUrl: 'http://localhost:3000',
 				});
-				toast.success('Login successful, redirecting you poop 💩....');
+				toast.success(`Login successful, welcome back ${email}`);
 				setTimeout(() => {
 					router.refresh();
 					router.push('/protected');
@@ -107,22 +108,62 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 			onSubmit={handleFormSubmit}
 			className='flex flex-col space-y-4 bg-gray-50 px-4 py-8 sm:px-16 relative'
 		>
-			{/* ... */}
-			<div>
-				<label htmlFor='name' className='block text-xs text-gray-600 uppercase'>
-					username
-				</label>
-				<input
-					id='name'
-					name='name'
-					type='text'
-					placeholder='john doe'
-					required
-					value={name}
-					onChange={(e) => setName(e.target.value)}
-					className='mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm'
-				/>
-			</div>
+			{type === 'register' && (
+				<>
+					<div>
+						<label
+							htmlFor='name'
+							className='block text-xs text-gray-600 uppercase'
+						>
+							username
+						</label>
+						<input
+							id='name'
+							name='name'
+							type='text'
+							placeholder='john doe'
+							required
+							value={name}
+							onChange={(e) => setName(e.target.value)}
+							className='mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm'
+						/>
+					</div>
+					<div className='relative mt-2'>
+						<label
+							htmlFor='image'
+							className='block text-xs text-gray-600 uppercase'
+						>
+							Upload Profile
+						</label>
+						<input
+							id='file'
+							name='file'
+							type='file'
+							accept='image/*'
+							required
+							onChange={handleImageChange}
+							className='mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm file:mr-4 file:px-4 file:py-2 file:text-sm file:border-0
+            file:rounded-full file:font-semibold file:text-black file:bg-gray-200
+            hover:file:bg-black hover:file:text-gray-200 hover:file:cursor-pointer'
+						/>
+						<div>
+							{imagePreview && (
+								<div className='absolute right-0 translate-y-1/2 top-0 mt-4 ml-2 w-10'>
+									<Image
+										src={imagePreview}
+										alt='chosen'
+										width={500}
+										height={500}
+										className={'w-8 h-8 object-contain rounded-full'}
+									/>
+								</div>
+							)}
+						</div>
+					</div>
+					<div className='border w-full rounded-md' />
+				</>
+			)}
+
 			<div>
 				<label
 					htmlFor='email'
@@ -154,6 +195,7 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 					<input
 						id='password'
 						name='password'
+						placeholder='*******'
 						type={showPassword ? 'text' : 'password'}
 						required
 						value={password}
@@ -170,40 +212,6 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 				</div>
 			</div>
 
-			{type === 'register' && (
-				<div className='relative mt-2'>
-					<label
-						htmlFor='image'
-						className='block text-xs text-gray-600 uppercase'
-					>
-						Upload Profile
-					</label>
-					<input
-						id='file'
-						name='file'
-						type='file'
-						accept='image/*'
-						required
-						onChange={handleImageChange}
-						className='mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm file:mr-4 file:px-4 file:py-2 file:text-sm file:border-0
-            file:rounded-full file:font-semibold file:text-black file:bg-gray-200
-            hover:file:bg-black hover:file:text-gray-200 hover:file:cursor-pointer'
-					/>
-					<div>
-						{imagePreview && (
-							<div className='absolute right-0 translate-y-1/2 top-0 mt-4 ml-2 w-10'>
-								<Image
-									src={imagePreview}
-									alt='chosen'
-									width={500}
-									height={500}
-									className={'w-8 h-8 object-contain rounded-full'}
-								/>
-							</div>
-						)}
-					</div>
-				</div>
-			)}
 			<button
 				disabled={loading}
 				className={`${
