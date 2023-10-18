@@ -1,4 +1,5 @@
 module.exports = {
+
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -6,6 +7,13 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundColor: {
+        "light": "#f9fafc",
+        "dark": "#101010"
+      },
+      height: {
+        'dynamic': '100dvh',
+      },
       animation: {
         'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },

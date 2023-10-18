@@ -1,15 +1,25 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { getServerSession } from "next-auth/next";
+'use client';
+import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 
-export default async function AuthStatus() {
-  const session = await getServerSession(authOptions);
-  return (
-    <div className="absolute top-5 w-full flex justify-center items-center">
-      {session && (
-        <p className="text-stone-200 text-sm">
-          Signed in as {session.user?.email}
-        </p>
-      )}
-    </div>
-  );
+export default function AuthStatus() {
+	const { data: session, status } = useSession();
+	const image = session?.user?.image;
+	const name = session?.user?.name;
+
+	return (
+		<div className='flex items-center justify-center w-full '>
+			{session && (
+				<div className='text-sm text-slate-900'>
+					<Image
+						width={512}
+						height={512}
+						className='object-contain w-8 h-8 rounded-full aspect-square'
+						src={image}
+						alt={`${name}'s profile`}
+					/>
+				</div>
+			)}
+		</div>
+	);
 }

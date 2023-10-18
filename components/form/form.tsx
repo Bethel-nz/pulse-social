@@ -53,7 +53,7 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 				toast.success(`Login successful, welcome back ${email}`);
 				setTimeout(() => {
 					router.refresh();
-					router.push('/protected');
+					router.push('/home');
 				}, 1500);
 			} catch (error) {
 				console.error(error);
@@ -66,7 +66,7 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 				formData.append('file', image);
 				formData.append('upload_preset', 'pulse-user');
 				const uploadResponse = await fetch(
-					'https://api.cloudinary.com/v1_1/pulse-demo/image/upload',
+					'https://api.cloudinary.com/v1_1/pulse-app/image/upload',
 					{
 						method: 'POST',
 						body: formData,
