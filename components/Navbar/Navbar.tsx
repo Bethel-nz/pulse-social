@@ -27,7 +27,7 @@ export default function Navbar() {
 
 	return (
 		<nav
-			className={`sticky flex flex-row items-center justify-between w-full p-2 mt-4 border-2 rounded-full gap-x-10 ${
+			className={`sticky flex flex-row items-center justify-between w-96 p-2 mt-4 border-2 rounded-full gap-x-10 ${
 				isScrolled
 					? 'bg-gray-400 rounded-full  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100'
 					: ''

@@ -28,7 +28,9 @@ model Post {
   id        String    @id @default(uuid())
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  title     String
+  content   String
+  image     String?
+  video     String?
   published Boolean   @default(false)
   userId    String
   user      User      @relation(fields: [userId], references: [id])

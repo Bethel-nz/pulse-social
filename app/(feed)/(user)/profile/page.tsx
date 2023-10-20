@@ -1,5 +1,10 @@
+import SignOut from '@/components/sign-out';
 import React from 'react';
 
 export default function page() {
-	return <div>profile page</div>;
+	return (
+		<div>
+			<SignOut />
+		</div>
+	);
 }

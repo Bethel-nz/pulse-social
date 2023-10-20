@@ -1,14 +1,12 @@
 'use client';
 import { ImagePlus, Video } from 'lucide-react';
-import { useState, FormEvent, ChangeEvent, useTransition } from 'react';
+import { useState, FormEvent, ChangeEvent } from 'react';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
-import { revalidatePath } from 'next/cache';
-import { usePathname } from 'next/navigation';
 import LoadingDots from '@/components/loading-dots/loading-dots';
+import { handleFileChange } from '@/lib/handleFileChange';
 
 export default function PostForm() {
-	const path = usePathname();
 	const [post, setPost] = useState('');
 	const [charCount, setCharCount] = useState(0);
 	const [selectedImage, setSelectedImage] = useState<File | string>('');
@@ -18,34 +16,6 @@ export default function PostForm() {
 	const [isLoading, setIsLoading] = useState(false);
 	const MAX_FILE_SIZE = 16 * 1024 * 1024;
 	const UPLOAD_PRESET = 'pulse-user';
-
-	const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-		const file = e.target.files?.[0];
-		if (file && file.size <= MAX_FILE_SIZE) {
-			const reader = new FileReader();
-			reader.onload = (event) => {
-				setImagePreview(event?.target?.result as string);
-			};
-			reader.readAsDataURL(file);
-			setSelectedImage(file);
-		} else {
-			toast.error('File size exceeds 16MB');
-		}
-	};
-
-	const handleVideoChange = (e: ChangeEvent<HTMLInputElement>) => {
-		const file = e.target.files?.[0];
-		if (file && file.size <= MAX_FILE_SIZE) {
-			const reader = new FileReader();
-			reader.onload = (event) => {
-				setVideoPreview(event?.target?.result as string);
-			};
-			reader.readAsDataURL(file);
-			setSelectedVideo(file);
-		} else {
-			toast.error('File size exceeds 16MB');
-		}
-	};
 
 	const handleTextAreaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		const value = e.target.value;
@@ -90,42 +60,6 @@ export default function PostForm() {
 				}
 			);
 
-			// if (
-			// 	(selectedImage && uploadImage instanceof Response && uploadImage.ok) ||
-			// 	(selectedVideo && uploadVideo instanceof Response && uploadVideo.ok)
-			// ) {
-			// 	if (
-			// 		selectedImage &&
-			// 		uploadImage instanceof Response &&
-			// 		uploadImage.ok
-			// 	) {
-			// 		toast('Image uploaded successfully!', {
-			// 			icon: '📷',
-			// 			style: {
-			// 				borderRadius: '10px',
-			// 				background: '#333',
-			// 				color: '#fff',
-			// 			},
-			// 		});
-			// 	} else if (
-			// 		selectedVideo &&
-			// 		uploadVideo instanceof Response &&
-			// 		uploadVideo.ok
-			// 	) {
-			// 		toast('Video uploaded successfully!', {
-			// 			icon: '🎥',
-			// 			style: {
-			// 				borderRadius: '10px',
-			// 				background: '#333',
-			// 				color: '#fff',
-			// 			},
-			// 		});
-			// 	}
-			// } else {
-			// 	toast.error('Upload failed.');
-			// 	return;
-			// }
-
 			const uploadedImageData = await uploadImage.json();
 			const uploadedVideoData = await uploadVideo.json();
 			const imageUrl: string = uploadedImageData.secure_url;
@@ -135,6 +69,9 @@ export default function PostForm() {
 				'http://localhost:3000/api/post/create',
 				{
 					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
 					body: JSON.stringify(data),
 				}
 			);
@@ -163,11 +100,11 @@ export default function PostForm() {
 	};
 
 	return (
-		<div className='w-96 bg-white rounded-md p-2 shadow-lg'>
+		<div className='w-96 md:w-[32em]  bg-white rounded-md p-2 shadow-lg'>
 			<form onSubmit={handleSubmit}>
 				<div className='mb-4'>
 					<textarea
-						className='w-full bg-gray-400/20 text-gray-500 shadow-sm border-gray-400 resize-none h-28 rounded-sm p-2 font-semibold '
+						className='w-full bg-gray-400/20 text-gray-500 shadow-sm border-gray-400 resize-none h-28 md:h-40 rounded-sm p-2 font-semibold '
 						value={post}
 						name='post'
 						placeholder={`What's on your mind ?`}
@@ -201,7 +138,14 @@ export default function PostForm() {
 							className='w-full bg-gray-400/20 text-slate-900 shadow-sm border-gray-400 rounded-md p-2 mt-2 hidden'
 							accept='video/*, video/mp4, video/x-m4v, video/webm'
 							max={16 * 1024 * 1024}
-							onChange={handleVideoChange} // Use the handleVideoChange function for video input
+							onChange={(e) => {
+								handleFileChange(
+									e,
+									MAX_FILE_SIZE,
+									setSelectedVideo,
+									setVideoPreview
+								);
+							}} // Use the handleVideoChange function for video input
 						/>
 						<input
 							type='file'
@@ -210,7 +154,14 @@ export default function PostForm() {
 							accept='image/*'
 							max={16 * 1024 * 1024}
 							className='w-full bg-gray-300 text-gray-800 shadow-sm border-gray-400 rounded-md p-2 hidden'
-							onChange={handleImageChange} // Use the handleImageChange function for image input
+							onChange={(e) => {
+								handleFileChange(
+									e,
+									MAX_FILE_SIZE,
+									setSelectedImage,
+									setImagePreview
+								);
+							}}
 						/>
 					</div>
 					<button
@@ -218,9 +169,9 @@ export default function PostForm() {
 						disabled={isLoading}
 						className={`${
 							isLoading
-								? 'cursor-not-allowed bg-gray-100'
+								? 'cursor-not-allowed border-black bg-gray-100 '
 								: ' bg-black text-white hover:bg-white hover:text-black'
-						} flex py-2 w-40 justify-center rounded-md font-semibold transition-all focus:outline-none`}
+						} flex py-2 w-40 h-10 items-center justify-center rounded-md hover:border-2 hover:border-black font-semibold transition-all focus:outline-none`}
 					>
 						{isLoading ? (
 							<LoadingDots color='#808080' />
@@ -232,7 +183,7 @@ export default function PostForm() {
 			</form>
 			<div className='mt-2 flex'>
 				{imagePreview && (
-					<div className='h-32 w-32 border-2 rounded-md shadow-sm'>
+					<div className='h-32 w-32 border-2 rounded-md shadow-sm relative grid place-items-center group'>
 						<Image
 							src={imagePreview}
 							width={500}
@@ -243,12 +194,12 @@ export default function PostForm() {
 					</div>
 				)}
 				{videoPreview && (
-					<div className='h-32 w-32 border-2 rounded-md shadow-sm'>
+					<div className='h-32 w-32 border-2 rounded-md shadow-sm relative'>
 						<video
 							src={videoPreview}
 							width={500}
 							height={500}
-							className={'aspect-square'}
+							className={'w-full h-full object-contain'}
 						/>
 					</div>
 				)}

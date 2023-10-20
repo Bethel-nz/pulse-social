@@ -6,7 +6,7 @@ export default function layout({ children }: Props) {
 	return (
 		<Wrapper>
 			<Navbar />
-			<main className='mt-6'>{children}</main>
+			<main className='mt-6 w-full'>{children}</main>
 		</Wrapper>
 	);
 }
