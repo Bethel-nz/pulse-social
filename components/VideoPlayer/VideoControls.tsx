@@ -53,7 +53,7 @@ const VideoControls: React.FC<VideoControlsProps> = ({
 					onClick={onPlayPause}
 				>
 					<div className=' fill-white group-hover:fill-[#aaaaaa] transition-colors duration-200 ease-in-out'>
-						{isPaused && progress <= 1 ? <PlayButton /> : <PauseButton />}
+						{isPaused ? <PlayButton /> : <PauseButton />}
 					</div>
 				</button>
 			</div>

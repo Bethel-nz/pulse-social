@@ -36,7 +36,7 @@ export default function PostCard({ post }: prop) {
 					{post.video && <VideoPlayer src={post.video} />}
 				</div>
 				<div className='w-full h-[0.10em] bg-gray-200 mt-4' />
-				<div className='flex mt-5 w-96 mx-auto justify-between'>
+				<div className='flex mt-5 mx-auto justify-between'>
 					<span className='flex gap-4 items-center'>
 						<button>
 							<Heart className='border-transparent border-gray-100 outline-none' />

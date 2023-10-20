@@ -46,7 +46,7 @@ export default function VideoPlayer({ src }: props) {
 	};
 	return (
 		<>
-			<div className='relative w-[22em] aspect-video md:w-[28em] rounded-lg overflow-hidden mt-4 shadow-md shadow-gray-500 mx-auto'>
+			<div className='relative w-full aspect-video md:w-[28em] rounded-lg overflow-hidden mt-4 shadow-md shadow-gray-500 mx-auto'>
 				<div className='absolute top-4 right-4 z-10'>
 					<VideoControls
 						progress={videoProgress}

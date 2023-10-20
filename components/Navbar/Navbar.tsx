@@ -11,14 +11,12 @@ export default function Navbar() {
 
 	useEffect(() => {
 		const checkScroll = () => {
-			if (window.scrollY > 100) {
-				// Sets the scroll height limit to 100px
+			if (window.scrollY >= 10) {
 				setIsScrolled(true);
 			} else {
 				setIsScrolled(false);
 			}
 		};
-
 		window.addEventListener('scroll', checkScroll);
 		return () => {
 			window.removeEventListener('scroll', checkScroll);
@@ -27,9 +25,9 @@ export default function Navbar() {
 
 	return (
 		<nav
-			className={`sticky flex flex-row items-center justify-between w-96 p-2 mt-4 border-2 rounded-full gap-x-10 ${
+			className={`flex flex-row items-center justify-between w-96 p-2 mt-4 border-2 rounded-full gap-x-10 z-20 top-4 transition-all duration-300 ease-in-out ${
 				isScrolled
-					? 'bg-gray-400 rounded-full  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100'
+					? 'fixed bg-gray-400 rounded-full bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100'
 					: ''
 			}`}
 		>
