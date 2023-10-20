@@ -14,7 +14,7 @@ type prop = {
 export default function PostCard({ post }: prop) {
 	return (
 		<>
-			<article className='bg-white text-gray-500 font-semibold p-4 border-2 rounded-md'>
+			<article className='bg-white text-gray-500 font-semibold p-4 border-2 rounded-md mt-4 shadow-md'>
 				<div className='flex justify-between items-center text-gray-900 '>
 					<div className='flex items-center'>
 						<span>

@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import Image from 'next/image';
 import LoadingDots from '@/components/loading-dots/loading-dots';
 import { handleFileChange } from '@/lib/handleFileChange';
+import { BASE_URL } from '@/lib/lib';
 
 export default function PostForm() {
 	const [post, setPost] = useState('');
@@ -66,7 +67,7 @@ export default function PostForm() {
 			const videoUrl: string = uploadedVideoData.secure_url;
 			const data = { post, imageUrl, videoUrl };
 			const registerResponse = await fetch(
-				'http://localhost:3000/api/post/create',
+				`http://${BASE_URL}/api/post/create`,
 				{
 					method: 'POST',
 					headers: {

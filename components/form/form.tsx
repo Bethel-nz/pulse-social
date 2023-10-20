@@ -7,6 +7,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Eye, EyeOff } from 'lucide-react';
+import { BASE_URL } from '@/lib/lib';
+import { handleFileChange } from '@/lib/handleFileChange';
 
 export default function Form({ type }: { type: 'login' | 'register' }) {
 	const [loading, setLoading] = useState(false);
@@ -14,27 +16,13 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 	const [name, setName] = useState('');
 	const [password, setPassword] = useState('');
 	const [selectedImage, setSelectedImage] = useState<File | string>('');
-	const [imagePreview, setImagePreview] = useState<string | null>(null); // For displaying the image preview
+	const [imagePreview, setImagePreview] = useState<string>(''); // For displaying the image preview
 	const [showPassword, setShowPassword] = useState(false);
+	const MAX_FILE_SIZE = 8 * 1024 * 1024;
 	const router = useRouter();
 
 	const togglePasswordVisibility = () => {
 		setShowPassword((prevShowPassword) => !prevShowPassword);
-	};
-
-	const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-		const file = e.target.files?.[0];
-
-		if (file) {
-			// Display the selected image preview
-			const reader = new FileReader();
-			reader.onload = (event) => {
-				setImagePreview(event?.target?.result as string);
-			};
-			reader.readAsDataURL(file);
-
-			setSelectedImage(file);
-		}
 	};
 
 	const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -48,7 +36,7 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 					email,
 					password,
 					redirect: false,
-					callbackUrl: 'http://localhost:3000',
+					callbackUrl: BASE_URL,
 				});
 				toast.success(`Login successful, welcome back ${email}`);
 				setTimeout(() => {
@@ -77,7 +65,7 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 					const imageUrl = uploadedImageData.secure_url;
 					const registerData = { name, email, password, image: imageUrl };
 					const registerResponse = await fetch(
-						'http://localhost:3000/api/auth/register',
+						`http://${BASE_URL}/api/auth/register`,
 						{
 							method: 'POST',
 							body: JSON.stringify(registerData),
@@ -141,7 +129,14 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 							type='file'
 							accept='image/*'
 							required
-							onChange={handleImageChange}
+							onChange={(e) => {
+								handleFileChange(
+									e,
+									MAX_FILE_SIZE,
+									setSelectedImage,
+									setImagePreview
+								);
+							}}
 							className='mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm file:mr-4 file:px-4 file:py-2 file:text-sm file:border-0
             file:rounded-full file:font-semibold file:text-black file:bg-gray-200
             hover:file:bg-black hover:file:text-gray-200 hover:file:cursor-pointer'

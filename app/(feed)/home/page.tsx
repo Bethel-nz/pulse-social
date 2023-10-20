@@ -6,6 +6,7 @@ import PostCard from '@/components/Card/PostCard';
 
 export default async function page() {
 	const data: Post[] = await fetchAllPost();
+	console.log(data);
 
 	return (
 		<div>
