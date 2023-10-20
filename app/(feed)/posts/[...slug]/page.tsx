@@ -1,5 +1,11 @@
 import React from 'react';
 
-export default function page() {
-	return <div>page</div>;
+type Params = {
+	params: {
+		slug: string;
+	};
+};
+
+export default function page({ params: { slug } }: Params) {
+	return <div>{slug}</div>;
 }

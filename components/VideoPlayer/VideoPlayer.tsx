@@ -55,13 +55,7 @@ export default function VideoPlayer({ src }: props) {
 					/>
 				</div>
 				<video className='w-full' ref={videoRef} loop>
-					<source
-						src={`${
-							src
-								? src
-								: 'https://res.cloudinary.com/pulse-app/video/upload/v1697767694/r68hjhwi25ywdyhq3czt.mp4'
-						}`}
-					/>
+					<source src={`${src}`} />
 				</video>
 			</div>
 		</>

@@ -38,7 +38,6 @@ export const POST = async (req: Request, res: Response) => {
 				email: email,
 			},
 		});
-		console.log(user);
 		if (!user) return null;
 		console.log({ data });
 		const result = await prisma?.post.create({
