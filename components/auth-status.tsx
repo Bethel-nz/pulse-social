@@ -4,7 +4,6 @@ import Image from 'next/image';
 
 export default function AuthStatus() {
 	const { data: session, status } = useSession();
-	const image = session?.user?.image;
 	const name = session?.user?.name;
 
 	return (
@@ -15,7 +14,7 @@ export default function AuthStatus() {
 						width={512}
 						height={512}
 						className='object-contain w-8 h-8 rounded-full aspect-square'
-						src={image}
+						src={session?.user?.image}
 						alt={`${name}'s profile`}
 					/>
 				</div>

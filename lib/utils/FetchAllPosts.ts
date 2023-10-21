@@ -6,5 +6,6 @@ export const fetchAllPost = async () => {
 		cache: 'no-store',
 	});
 	const data = await response.json();
+	console.log(data);
 	return data as Promise<Post[]>;
 };

@@ -14,6 +14,7 @@ export const GET = async (req: Request) => {
 		});
 		return NextResponse.json(data);
 	} catch (error) {
+		console.log(error);
 		return NextResponse.json({ error });
 	}
 };

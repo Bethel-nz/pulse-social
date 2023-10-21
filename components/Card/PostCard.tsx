@@ -1,3 +1,4 @@
+'use client';
 import { Post } from '@/types/type';
 import React from 'react';
 import { formatDate } from '@/lib/formatDate';
@@ -5,7 +6,6 @@ import VideoPlayer from '@/components/VideoPlayer/VideoPlayer';
 import ImageView from '@/components/ImageView/ImageView';
 import { Heart, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
-import AuthStatus from '@/components/auth-status';
 import Userprofile from '@/components/UserProflie/Userprofile';
 
 type prop = {
