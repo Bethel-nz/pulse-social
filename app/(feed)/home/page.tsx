@@ -6,15 +6,14 @@ import PostCard from '@/components/Card/PostCard';
 
 export default async function page() {
 	const data: Post[] = await fetchAllPost();
-	console.log(data);
-
+	const post = await data;
 	return (
 		<div>
 			<section>
 				<PostForm />
 			</section>
 			<section className='mt-4 w-96 md:w-[32em] rounded-md p-2 shadow-lg pt-4 border'>
-				{data?.map((post: Post) => (
+				{post?.map((post: Post) => (
 					<PostCard post={post} key={post.id} />
 				))}
 			</section>

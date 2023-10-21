@@ -31,8 +31,6 @@ export const POST = async (req: Request, res: Response) => {
 		if (!email) {
 			return NextResponse.json({ message: 'Email not found in session' });
 		}
-
-		console.log(email);
 		const user = await prisma.user.findUnique({
 			where: {
 				email: email,

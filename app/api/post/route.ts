@@ -12,10 +12,8 @@ export const GET = async (req: Request) => {
 				createdAt: 'desc',
 			},
 		});
-		console.log(data);
 		return NextResponse.json(data);
 	} catch (error) {
-		console.log(error);
 		return NextResponse.json({ error });
 	}
 };

@@ -43,7 +43,7 @@ const VideoControls: React.FC<VideoControlsProps> = ({
 					stroke='#ffffff'
 					strokeWidth={width}
 					strokeDasharray={dashArray}
-					strokeDashoffset={dashOffset}
+					strokeDashoffset={Number(dashOffset)}
 					strokeLinecap='round'
 				/>
 			</svg>

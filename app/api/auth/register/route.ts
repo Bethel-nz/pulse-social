@@ -30,5 +30,6 @@ export async function POST(req: Request) {
 		return NextResponse.json(user);
 	} catch (error) {
 		console.error(error);
+		return NextResponse.json(error);
 	}
 }
