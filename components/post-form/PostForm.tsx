@@ -6,6 +6,7 @@ import Image from 'next/image';
 import LoadingDots from '@/components/loading-dots/loading-dots';
 import { handleFileChange } from '@/lib/handleFileChange';
 import { useBaseURL } from '@/hooks/useBaseUrl';
+import { revalidateTag, revalidatePath } from 'next/cache';
 
 export default function PostForm() {
 	const BASE_URL = useBaseURL();
@@ -77,9 +78,12 @@ export default function PostForm() {
 			if (registerResponse.ok) {
 				setIsLoading(false);
 				setSelectedImage('');
+				setImagePreview('');
 				setVideoPreview('');
+				setSelectedVideo('');
 				setCharCount(0);
 				setPost('');
+
 				toast('New post submitted !', {
 					icon: '🔥',
 					style: {
@@ -88,13 +92,15 @@ export default function PostForm() {
 						color: '#fff',
 					},
 				});
+				revalidatePath('/home');
+				revalidateTag('new post');
 			} else {
 				const { error } = await registerResponse.json();
 				toast.error(error);
 			}
 		} catch (error) {
 			console.error(error);
-			toast.error('Unknown error');
+			toast.error('Registration failed');
 		}
 	};
 
