@@ -5,9 +5,10 @@ import toast from 'react-hot-toast';
 import Image from 'next/image';
 import LoadingDots from '@/components/loading-dots/loading-dots';
 import { handleFileChange } from '@/lib/handleFileChange';
-import { BASE_URL } from '@/lib/lib';
+import { useBaseURL } from '@/hooks/useBaseUrl';
 
 export default function PostForm() {
+	const BASE_URL = useBaseURL();
 	const [post, setPost] = useState('');
 	const [charCount, setCharCount] = useState(0);
 	const [selectedImage, setSelectedImage] = useState<File | string>('');

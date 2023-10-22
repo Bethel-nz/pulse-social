@@ -7,10 +7,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Eye, EyeOff } from 'lucide-react';
-import { BASE_URL } from '@/lib/lib';
 import { handleFileChange } from '@/lib/handleFileChange';
+import { useBaseURL } from '@/hooks/useBaseUrl';
 
 export default function Form({ type }: { type: 'login' | 'register' }) {
+	const BASE_URL = useBaseURL();
+
 	const [loading, setLoading] = useState(false);
 	const [email, setEmail] = useState('');
 	const [name, setName] = useState('');
@@ -36,7 +38,7 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 					email,
 					password,
 					redirect: false,
-					callbackUrl: BASE_URL,
+					callbackUrl: '',
 				});
 				toast.success(`Login successful, welcome back ${email}`);
 				setTimeout(() => {

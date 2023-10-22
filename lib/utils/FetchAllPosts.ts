@@ -1,7 +1,8 @@
 import { Post } from '@/types/type';
-import { BASE_URL } from '../lib';
+import { headers } from 'next/headers';
 
 export const fetchAllPost = async () => {
+	const BASE_URL = headers().get('Host');
 	const response = await fetch(`http://${BASE_URL}/api/post`, {
 		cache: 'no-store',
 	});
