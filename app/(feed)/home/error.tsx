@@ -22,7 +22,9 @@ export default function Error({
 					<PostForm />
 				</div>
 				<div className='bg-white p-4 w-full mt-2 shadow-md text-center mx-auto'>
-					<h2 className='font-bold'>Something went wrong!</h2>
+					<h2 className='font-semibold text-xl text-slate-500'>
+						Something went wrong!
+					</h2>
 					<button
 						onClick={reset}
 						className='flex items-center  mx-auto py-2 px-4 space-x-3 mt-4 border-gray-400 bg-gray-400 rounded-full'
