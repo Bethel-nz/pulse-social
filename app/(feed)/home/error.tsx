@@ -22,13 +22,15 @@ export default function Error({
 					<PostForm />
 				</div>
 				<div className='bg-white p-4 w-full mt-2 shadow-md text-center mx-auto'>
-					<h2>Something went wrong!</h2>
+					<h2 className='font-bold'>Something went wrong!</h2>
 					<button
 						onClick={reset}
-						className='flex items-center space-x-1 mx-auto'
+						className='flex items-center  mx-auto py-2 px-4 space-x-3 mt-4 border-gray-400 bg-gray-400 rounded-full'
 					>
-						<RefreshCcwIcon size={16} className='text-gray-400' />
-						<span className='font-semibold'>Try again</span>
+						<RefreshCcwIcon size={16} className='text-white' />
+						<span className='font-semibold  text-white ml-4 rounded-md'>
+							Try again
+						</span>
 					</button>
 				</div>
 				<div className='mt-4 w-96 md:w-[32em] rounded-md p-2 shadow-lg pt-4 border'>
