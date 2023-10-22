@@ -14,12 +14,7 @@ type prop = {
 };
 export default function PostCard({ post }: prop) {
 	return (
-		<motion.div
-			initial={{ opacity: 0, y: 20 }}
-			animate={{ opacity: 1, y: 0 }}
-			whileInView={{ opacity: 1, y: 0 }}
-			transition={{ duration: 0.5 }}
-		>
+		<>
 			<article className='bg-white text-gray-900 font-semibold p-4 border-2 rounded-md mt-4 shadow-md'>
 				<div className='flex justify-between items-center text-gray-950 '>
 					<div className='flex items-center'>
@@ -63,6 +58,6 @@ export default function PostCard({ post }: prop) {
 					</span>
 				</div>
 			</article>
-		</motion.div>
+		</>
 	);
 }

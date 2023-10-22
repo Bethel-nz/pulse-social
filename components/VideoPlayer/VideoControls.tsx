@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-
+import { motion } from 'framer-motion';
 import PlayButton from '../../public/play.svg';
 import PauseButton from '../../public/pause.svg';
 
@@ -26,7 +26,11 @@ const VideoControls: React.FC<VideoControlsProps> = ({
 
 	return (
 		<div className='relative flex justify-center items-center'>
-			<svg width={size} height={size} style={{ transform: 'rotate(-90deg)' }}>
+			<motion.svg
+				width={size}
+				height={size}
+				style={{ transform: 'rotate(-90deg)' }}
+			>
 				<circle
 					cx={center}
 					cy={center}
@@ -46,7 +50,7 @@ const VideoControls: React.FC<VideoControlsProps> = ({
 					strokeDashoffset={Number(dashOffset)}
 					strokeLinecap='round'
 				/>
-			</svg>
+			</motion.svg>
 			<div className='absolute'>
 				<button
 					className='group cursor-pointer flex justify-center items-center'
