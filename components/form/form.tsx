@@ -32,13 +32,12 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 		setLoading(true);
 
 		if (type === 'login') {
-			// Login logic
 			try {
 				await signIn('credentials', {
 					email,
 					password,
 					redirect: false,
-					callbackUrl: '',
+					callbackUrl: BASE_URL,
 				});
 				toast.success(`Login successful, welcome back ${email}`);
 				setTimeout(() => {
@@ -47,7 +46,7 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 				}, 1500);
 			} catch (error) {
 				console.error(error);
-				toast.error('Unknown error');
+				toast.error(' Registration Failed');
 			}
 		} else {
 			try {

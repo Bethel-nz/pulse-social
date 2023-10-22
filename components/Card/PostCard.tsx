@@ -6,6 +6,7 @@ import VideoPlayer from '@/components/VideoPlayer/VideoPlayer';
 import ImageView from '@/components/ImageView/ImageView';
 import { Heart, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import Userprofile from '@/components/UserProflie/Userprofile';
 
 type prop = {
@@ -13,9 +14,14 @@ type prop = {
 };
 export default function PostCard({ post }: prop) {
 	return (
-		<>
-			<article className='bg-white text-gray-500 font-semibold p-4 border-2 rounded-md mt-4 shadow-md'>
-				<div className='flex justify-between items-center text-gray-900 '>
+		<motion.div
+			initial={{ opacity: 0, y: 20 }}
+			animate={{ opacity: 1, y: 0 }}
+			whileInView={{ opacity: 1, y: 0 }}
+			transition={{ duration: 0.5 }}
+		>
+			<article className='bg-white text-gray-900 font-semibold p-4 border-2 rounded-md mt-4 shadow-md'>
+				<div className='flex justify-between items-center text-gray-950 '>
 					<div className='flex items-center'>
 						<span>
 							<Userprofile
@@ -57,6 +63,6 @@ export default function PostCard({ post }: prop) {
 					</span>
 				</div>
 			</article>
-		</>
+		</motion.div>
 	);
 }
