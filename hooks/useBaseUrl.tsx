@@ -5,7 +5,7 @@ export function useBaseURL() {
 
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
-			setBaseURL(window.location.href);
+			setBaseURL(window.location.origin);
 		} else {
 			if (process.env.VERCEL) {
 				setBaseURL(process.env.VERCEL);

@@ -67,16 +67,13 @@ export default function PostForm() {
 			const imageUrl: string = uploadedImageData.secure_url;
 			const videoUrl: string = uploadedVideoData.secure_url;
 			const data = { post, imageUrl, videoUrl };
-			const registerResponse = await fetch(
-				`http://${BASE_URL}/api/post/create`,
-				{
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify(data),
-				}
-			);
+			const registerResponse = await fetch(`${BASE_URL}/api/post/create`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(data),
+			});
 			if (registerResponse.ok) {
 				setIsLoading(false);
 				setSelectedImage('');

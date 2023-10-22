@@ -67,7 +67,7 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 					const imageUrl = uploadedImageData.secure_url;
 					const registerData = { name, email, password, image: imageUrl };
 					const registerResponse = await fetch(
-						`http://${BASE_URL}/api/auth/register`,
+						`${BASE_URL}/api/auth/register`,
 						{
 							method: 'POST',
 							body: JSON.stringify(registerData),
