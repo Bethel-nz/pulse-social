@@ -15,7 +15,7 @@ export default function AuthStatus() {
 						width={512}
 						height={512}
 						className='object-contain w-8 h-8 rounded-full aspect-square'
-						src={image && image}
+						src={image}
 						alt={`${name}'s profile`}
 					/>
 				</div>

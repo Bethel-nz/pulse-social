@@ -4,10 +4,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 type props = {
 	children: ReactNode;
-	key: Key;
 	index: number;
 };
-export function StaggerWrapper({ children, key, index }: props) {
+export function StaggerWrapper({ children, index }: props) {
 	return (
 		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
 			<AnimatePresence>

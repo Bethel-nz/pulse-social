@@ -6,7 +6,7 @@ import Image from 'next/image';
 import LoadingDots from '@/components/loading-dots/loading-dots';
 import { handleFileChange } from '@/lib/handleFileChange';
 import { useBaseURL } from '@/hooks/useBaseUrl';
-import { revalidateTag, revalidatePath } from 'next/cache';
+import { usePathname, useRouter } from 'next/navigation';
 
 export default function PostForm() {
 	const BASE_URL = useBaseURL();
@@ -19,6 +19,9 @@ export default function PostForm() {
 	const [isLoading, setIsLoading] = useState(false);
 	const MAX_FILE_SIZE = 16 * 1024 * 1024;
 	const UPLOAD_PRESET = 'pulse-user';
+	const router = useRouter();
+	const path = usePathname();
+	const refreshData = () => router.replace(path);
 
 	const handleTextAreaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		const value = e.target.value;
@@ -84,6 +87,7 @@ export default function PostForm() {
 				setCharCount(0);
 				setPost('');
 
+				refreshData();
 				toast('New post submitted !', {
 					icon: '🔥',
 					style: {
@@ -92,15 +96,14 @@ export default function PostForm() {
 						color: '#fff',
 					},
 				});
-				revalidatePath('/home');
-				revalidateTag('new post');
 			} else {
 				const { error } = await registerResponse.json();
 				toast.error(error);
 			}
 		} catch (error) {
 			console.error(error);
-			toast.error('Post failed');
+			// toast.error('Post failed');
+			alert(error);
 		}
 	};
 

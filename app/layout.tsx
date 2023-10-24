@@ -34,7 +34,6 @@ export default async function RootLayout({
 	return (
 		<html lang='en'>
 			<body className={`${inter.variable} h-dynamic bg-light`}>
-				<Toaster />
 				<Provider>{children}</Provider>
 			</body>
 		</html>

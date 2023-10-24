@@ -1,4 +1,5 @@
 import { SkeletonCard } from '@/components/Skeleton/SkeletonCard';
+import { StaggerWrapper } from '@/components/StaggerWrapper/StaggerWrapper';
 import PostForm from '@/components/post-form/PostForm';
 import React from 'react';
 
@@ -10,11 +11,13 @@ export default function Loading() {
 					<PostForm />
 				</div>
 				<div className='mt-4 w-96 md:w-[32em] rounded-md p-2 shadow-lg pt-4 border'>
-					<SkeletonCard type='post' />
-					<SkeletonCard type='video' />
-					<SkeletonCard type='post' />
-					<SkeletonCard type='post' />
-					<SkeletonCard type='video' />
+					<StaggerWrapper index={5}>
+						<SkeletonCard type='post' />
+						<SkeletonCard type='video' />
+						<SkeletonCard type='post' />
+						<SkeletonCard type='post' />
+						<SkeletonCard type='video' />
+					</StaggerWrapper>
 				</div>
 			</div>
 		</div>

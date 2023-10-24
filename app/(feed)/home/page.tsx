@@ -13,7 +13,7 @@ export default async function page() {
 			</section>
 			<section className='mt-4 w-96 md:w-[32em] rounded-md p-2 shadow-lg pt-4 border'>
 				{data &&
-					data.map((post: Post, index) => (
+					data?.map((post: Post, index) => (
 						<StaggerWrapper key={post.id} index={index}>
 							<PostCard post={post} key={post.id} />
 						</StaggerWrapper>

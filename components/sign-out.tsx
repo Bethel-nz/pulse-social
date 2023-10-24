@@ -8,8 +8,8 @@ export default function SignOut() {
 		<button
 			className='text-stone-400 hover:text-stone-200 transition-all border-2 p-4 rounded-md'
 			onClick={() => {
-				router.push('/login');
 				signOut();
+				router.replace('/login');
 			}}
 		>
 			Goddammit, sign me out!

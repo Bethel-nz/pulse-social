@@ -3,6 +3,7 @@ import { authOptions } from '../../auth/[...nextauth]/route';
 import { NextResponse } from 'next/server';
 
 import prisma from 'prisma/client';
+import { revalidateTag } from 'next/cache';
 
 type Data = {
 	post: string;
@@ -45,6 +46,8 @@ export const POST = async (req: Request, res: Response) => {
 				userId: user.id,
 			},
 		});
+		console.log(result);
+		revalidateTag('all-post');
 		return NextResponse.json({ message: result });
 	} catch (err) {
 		return NextResponse.json({ message: err });
