@@ -86,7 +86,6 @@ export default function PostForm() {
 				setSelectedVideo('');
 				setCharCount(0);
 				setPost('');
-
 				refreshData();
 				toast('New post submitted !', {
 					icon: '🔥',
@@ -102,8 +101,7 @@ export default function PostForm() {
 			}
 		} catch (error) {
 			console.error(error);
-			// toast.error('Post failed');
-			alert(error);
+			toast.error('Post failed');
 		}
 	};
 
