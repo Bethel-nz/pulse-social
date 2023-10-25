@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 export function useBaseURL() {
 	const [baseURL, setBaseURL] = useState('');
@@ -13,5 +13,7 @@ export function useBaseURL() {
 		}
 	}, []);
 
-	return baseURL;
+	const memoizedBaseURL = useMemo(() => baseURL, [baseURL]);
+
+	return memoizedBaseURL;
 }
