@@ -7,8 +7,8 @@ export function useBaseURL() {
 		if (typeof window !== 'undefined') {
 			setBaseURL(window.location.origin);
 		} else {
-			if (process.env.VERCEL) {
-				setBaseURL(process.env.VERCEL);
+			if (process.env.BASE_URL) {
+				setBaseURL(process.env.BASE_URL);
 			}
 		}
 	}, []);
