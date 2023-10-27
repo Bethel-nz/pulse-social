@@ -21,7 +21,6 @@ model User {
   posts    Post[]
   comments Comment[]
   hearts   Heart[]
-  role     String // Add a role field for user roles (ADMIN or BASIC)
 }
 
 model Post {

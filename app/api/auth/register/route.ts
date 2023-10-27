@@ -24,9 +24,9 @@ export async function POST(req: Request) {
 				email: email,
 				password: hashPassword,
 				image: image,
-				role: 'ADMIN',
 			},
 		});
+		console.log(user);
 		return NextResponse.json(user);
 	} catch (error) {
 		return NextResponse.json(error);
