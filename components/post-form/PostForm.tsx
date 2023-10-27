@@ -21,7 +21,10 @@ export default function PostForm() {
 	const UPLOAD_PRESET = 'pulse-user';
 	const router = useRouter();
 	const path = usePathname();
-	const refreshData = () => router.replace(path);
+	const refreshData = () =>
+		setTimeout(() => {
+			router.replace(path);
+		}, 500);
 
 	const handleTextAreaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		const value = e.target.value;

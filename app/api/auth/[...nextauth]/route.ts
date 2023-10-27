@@ -4,6 +4,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcrypt';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import prisma from 'prisma/client';
+import { NextResponse } from 'next/server';
 
 export const authOptions: NextAuthOptions = {
 	adapter: PrismaAdapter(prisma),
@@ -31,14 +32,19 @@ export const authOptions: NextAuthOptions = {
 						email: credentials.email,
 					},
 				});
-				if (!user) return null;
+				if (!user) {
+					return NextResponse.json({ message: 'User not found' }) && null;
+				}
 
 				const passwordMatch = await bcrypt.compare(
 					credentials.password,
 					user.password
 				);
 				if (!passwordMatch) return null;
-				return user;
+
+				return (
+					NextResponse.json({ message: `welcome back ${user.name}` }) && user
+				);
 			},
 		}),
 	],

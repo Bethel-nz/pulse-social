@@ -26,7 +26,6 @@ export async function POST(req: Request) {
 				image: image,
 			},
 		});
-		console.log(user);
 		return NextResponse.json(user);
 	} catch (error) {
 		return NextResponse.json(error);

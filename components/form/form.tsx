@@ -1,6 +1,6 @@
 'use client';
 import { useState, FormEvent, ChangeEvent } from 'react';
-import { signIn } from 'next-auth/react';
+import { SignInResponse, signIn } from 'next-auth/react';
 import LoadingDots from '@/components/loading-dots/loading-dots';
 import toast from 'react-hot-toast';
 import Link from 'next/link';
@@ -32,22 +32,24 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 		setLoading(true);
 
 		if (type === 'login') {
-			try {
-				await signIn('credentials', {
-					email,
-					password,
-					redirect: false,
-					callbackUrl: BASE_URL,
-				});
-				toast.success(`Login successful, welcome back ${email}`);
-				setTimeout(() => {
-					router.refresh();
-					router.push('/home');
-				}, 1500);
-			} catch (error) {
-				console.error(error);
-				toast.error(' Registration Failed');
-			}
+			await signIn('credentials', {
+				email,
+				password,
+				redirect: false,
+				callbackUrl: BASE_URL,
+			}).then((response) => {
+				const { ok, error } = response as SignInResponse;
+				if (ok) {
+					toast.success(`welcome back ${email}`);
+					setTimeout(() => {
+						router.refresh();
+						router.push('/home');
+					}, 1000);
+				} else {
+					console.error(error);
+					toast.error(`${error}`);
+				}
+			});
 		} else {
 			try {
 				const image: File | string = selectedImage;
