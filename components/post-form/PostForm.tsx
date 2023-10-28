@@ -20,11 +20,10 @@ export default function PostForm() {
 	const MAX_FILE_SIZE = 16 * 1024 * 1024;
 	const UPLOAD_PRESET = 'pulse-user';
 	const router = useRouter();
-	const path = usePathname();
-	const refreshData = () =>
-		setTimeout(() => {
-			router.replace(path);
-		}, 500);
+	const pathName = usePathname();
+	const refreshData = (path: string) => {
+		router.replace(path);
+	};
 
 	const handleTextAreaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		const value = e.target.value;
@@ -89,7 +88,6 @@ export default function PostForm() {
 				setSelectedVideo('');
 				setCharCount(0);
 				setPost('');
-				refreshData();
 				toast('New post submitted !', {
 					icon: '🔥',
 					style: {
@@ -102,6 +100,7 @@ export default function PostForm() {
 				const { error } = await registerResponse.json();
 				toast.error(error);
 			}
+			refreshData(pathName);
 		} catch (error) {
 			console.error(error);
 			toast.error('Post failed');

@@ -14,6 +14,7 @@ type Data = {
 
 export const POST = async (req: Request, res: Response) => {
 	const session = await getServerSession(authOptions);
+	console.log(session);
 	try {
 		const data: Data = await req.json();
 		const { post, imageUrl, videoUrl } = data;
@@ -46,7 +47,6 @@ export const POST = async (req: Request, res: Response) => {
 				userId: user.id,
 			},
 		});
-		console.log(result);
 		revalidateTag('all-post');
 		return NextResponse.json({ message: result });
 	} catch (err) {

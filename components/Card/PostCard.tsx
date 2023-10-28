@@ -7,6 +7,7 @@ import ImageView from '@/components/ImageView/ImageView';
 import { Heart, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
 import Userprofile from '@/components/UserProflie/Userprofile';
+import { LikeButton } from './LikeButton/LikeButton';
 
 type prop = {
 	post: Post;
@@ -37,14 +38,11 @@ export default function PostCard({ post }: prop) {
 				</div>
 				<div className='w-full h-[0.10em] bg-gray-200 mt-4' />
 				<div className='flex mt-5 mx-auto justify-between'>
-					<span className='flex gap-4 items-center'>
-						<button>
-							<Heart className='border-transparent border-gray-100 outline-none' />
-						</button>
-						{post.hearts.length <= 1
-							? `${post.hearts.length} likes`
-							: `${post.hearts} likes`}
-					</span>
+					<LikeButton
+						heart={post.hearts}
+						postId={post.id}
+						userId={post.user.id}
+					/>
 					<span className='flex gap-4 items-center'>
 						<span>
 							<MessageCircle />

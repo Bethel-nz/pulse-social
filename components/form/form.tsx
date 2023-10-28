@@ -40,11 +40,10 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 			}).then((response) => {
 				const { ok, error } = response as SignInResponse;
 				if (ok) {
-					toast.success(`welcome back ${email}`);
 					setTimeout(() => {
-						router.refresh();
+						toast.success(`welcome back ${email}`);
 						router.push('/home');
-					}, 1000);
+					}, 500);
 				} else {
 					console.error(error);
 					toast.error(`${error}`);

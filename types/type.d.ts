@@ -5,6 +5,7 @@ export type Props = {
 };
 
 export type Post = {
+	find: any;
 	id: string;
 	createdAt: string;
 	updatedAt: string;
@@ -23,5 +24,9 @@ export type Post = {
 		role: string;
 	};
 	comments: string[];
-	hearts: string[];
+	hearts: {
+		id: string;
+		postId: string;
+		userId: string;
+	}[];
 };
