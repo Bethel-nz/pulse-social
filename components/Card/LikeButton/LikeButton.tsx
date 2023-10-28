@@ -38,13 +38,15 @@ export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 	};
 	const handleClick = () => {
 		setUserLiked((prev) => !prev);
+		sendLike();
+	};
+	useEffect(() => {
 		if (!userLiked) {
 			setLikeCount(likeCount + 1);
 		} else {
-			setLikeCount(heart.length);
+			setLikeCount(heart.length - 1);
 		}
-		sendLike();
-	};
+	}, [heart.length, likeCount, setLikeCount, userLiked]);
 	useEffect(() => {
 		const userFound = heart.find((like) => like.userId === userId);
 		if (userFound) {
