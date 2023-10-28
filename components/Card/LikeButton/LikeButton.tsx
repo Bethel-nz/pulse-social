@@ -1,7 +1,8 @@
 'use client';
 import { Heart } from 'lucide-react';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import React, { useCallback, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
 type heart = {
 	id: string;
@@ -16,13 +17,10 @@ type likeButtonProps = {
 const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
 export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 	const [userLiked, setUserLiked] = useState(false);
-	const [likeCount, setLikeCount] = useState(0);
+	const [likeCount, setLikeCount] = useState(heart.length);
+	const [processingLike, setProcessingLike] = useState(false);
 
-	useEffect(() => {
-		setLikeCount(heart.length);
-	}, [heart]);
-
-	const handleClick = useCallback(async () => {
+	const sendLike = async () => {
 		const res = await fetch(`${BASE_URL}/api/post/likePost`, {
 			cache: 'no-store',
 			method: 'POST',
@@ -31,27 +29,30 @@ export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 			},
 			body: JSON.stringify({ postId: postId }),
 		});
-		setUserLiked((prev) => !prev);
 		if (res.ok) {
+			setLikeCount((prevCount) => prevCount + 1);
 			return;
 		} else {
 			console.error('something went wrong!');
 		}
-		revalidatePath('/home');
-	}, [postId]);
-
-	const findUser = useCallback(
-		(userId: string) => {
-			return heart.find((like) => like.userId === userId);
-		},
-		[heart]
-	);
-
+	};
+	const handleClick = () => {
+		setUserLiked((prev) => !prev);
+		if (!userLiked) {
+			setLikeCount(likeCount + 1);
+		} else {
+			setLikeCount(heart.length);
+		}
+		sendLike();
+	};
 	useEffect(() => {
-		const userFound = findUser(userId);
-		setUserLiked(!!userFound);
-		setLikeCount((prev) => (userLiked ? prev - 1 : prev + 1));
-	}, [findUser, userId, heart, userLiked]);
+		const userFound = heart.find((like) => like.userId === userId);
+		if (userFound) {
+			setUserLiked(true);
+		} else {
+			setUserLiked(false);
+		}
+	}, [userId, heart, likeCount]);
 
 	return (
 		<button
@@ -61,11 +62,11 @@ export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 			<span>
 				<Heart
 					className={`border-transparent outline-none ${
-						userLiked ? ' fill-pink-500' : 'bg-white fill-white'
+						userLiked ? 'fill-pink-500 ' : ' fill-white'
 					}`}
 				/>
 			</span>
-			{likeCount === 0 ? `0 likes` : `${likeCount} likes`}
+			{likeCount} likes
 		</button>
 	);
 };
