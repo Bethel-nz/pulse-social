@@ -15,10 +15,10 @@ type likeButtonProps = {
 	postId: string;
 	userId: string;
 };
+const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
 export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 	const [userLiked, setUserLiked] = useState(false);
 	// const [userHeart, setUserHeart] = useState<Post | null>(null);
-	const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
 
 	// const fetchUserLikes = useCallback(async () => {
 	// 	const res = await fetch(`${BASE_URL}/api/post`, {
@@ -38,13 +38,14 @@ export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 			},
 			body: JSON.stringify({ postId: postId }),
 		});
+		setUserLiked((prev) => !prev);
 		if (res.ok) {
-			return 'ok';
+			return;
 		} else {
 			console.error('something went wrong!');
 		}
 		revalidatePath('/home');
-	}, [BASE_URL, postId]);
+	}, [postId]);
 
 	const findUser = useCallback(
 		(userId: string) => {
@@ -56,7 +57,7 @@ export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 	useEffect(() => {
 		const userFound = findUser(userId);
 		setUserLiked(!!userFound);
-	}, [findUser, userId]);
+	}, [findUser, userId, heart]);
 
 	return (
 		<button
