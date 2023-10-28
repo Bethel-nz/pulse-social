@@ -16,6 +16,11 @@ type likeButtonProps = {
 const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
 export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 	const [userLiked, setUserLiked] = useState(false);
+	const [likeCount, setLikeCount] = useState(0);
+
+	useEffect(() => {
+		setLikeCount(heart.length);
+	}, [heart]);
 
 	const handleClick = useCallback(async () => {
 		const res = await fetch(`${BASE_URL}/api/post/likePost`, {
@@ -45,7 +50,8 @@ export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 	useEffect(() => {
 		const userFound = findUser(userId);
 		setUserLiked(!!userFound);
-	}, [findUser, userId, heart]);
+		setLikeCount((prev) => (userLiked ? prev - 1 : prev + 1));
+	}, [findUser, userId, heart, userLiked]);
 
 	return (
 		<button
@@ -59,7 +65,7 @@ export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 					}`}
 				/>
 			</span>
-			{heart.length === 0 ? `0 likes` : `${heart.length} likes`}
+			{likeCount === 0 ? `0 likes` : `${likeCount} likes`}
 		</button>
 	);
 };
