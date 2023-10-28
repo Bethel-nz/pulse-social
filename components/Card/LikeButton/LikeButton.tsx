@@ -44,7 +44,7 @@ export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 		if (!userLiked) {
 			setLikeCount(likeCount + 1);
 		} else {
-			setLikeCount(heart.length - 1);
+			setLikeCount(likeCount - 1);
 		}
 	}, [heart.length, likeCount, setLikeCount, userLiked]);
 	useEffect(() => {
