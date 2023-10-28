@@ -1,8 +1,6 @@
 'use client';
-import { Post } from '@/types/type';
 import { Heart } from 'lucide-react';
 import { revalidatePath } from 'next/cache';
-import { usePathname, useRouter } from 'next/navigation';
 import React, { useCallback, useEffect, useState } from 'react';
 
 type heart = {
@@ -18,16 +16,6 @@ type likeButtonProps = {
 const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
 export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 	const [userLiked, setUserLiked] = useState(false);
-	// const [userHeart, setUserHeart] = useState<Post | null>(null);
-
-	// const fetchUserLikes = useCallback(async () => {
-	// 	const res = await fetch(`${BASE_URL}/api/post`, {
-	// 		next: { revalidate: 1, tags: ['all-post'] },
-	// 		cache: 'no-cache',
-	// 	});
-	// 	const result = await res.json();
-	// 	setUserHeart(result);
-	// }, [BASE_URL]);
 
 	const handleClick = useCallback(async () => {
 		const res = await fetch(`${BASE_URL}/api/post/likePost`, {
