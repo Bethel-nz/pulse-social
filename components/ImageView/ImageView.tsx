@@ -14,7 +14,7 @@ export default function ImageView({ src, alt }: props) {
 				src={src}
 				width={500}
 				height={500}
-				className='w-[22em] aspect-auto md:w-[28em] mt-4 shadow-md shadow-gray-500 mx-auto rounded-lg '
+				className='w-[22em] h-full object-contain aspect-auto md:w-[28em] mt-4 shadow-md shadow-gray-500 mx-auto rounded-lg '
 			/>
 		</>
 	);
