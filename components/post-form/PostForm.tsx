@@ -7,6 +7,7 @@ import LoadingDots from '@/components/loading-dots/loading-dots';
 import { handleFileChange } from '@/lib/handleFileChange';
 import { useBaseURL } from '@/hooks/useBaseUrl';
 import { usePathname, useRouter } from 'next/navigation';
+import { fetchAllPost } from '@/lib/utils/FetchAllPosts';
 
 export default function PostForm() {
 	const BASE_URL = useBaseURL();
@@ -21,8 +22,8 @@ export default function PostForm() {
 	const UPLOAD_PRESET = 'pulse-user';
 	const router = useRouter();
 	const pathName = usePathname();
-	const refreshData = (path: string) => {
-		router.replace(path);
+	const refreshData = () => {
+		router.refresh();
 	};
 
 	const handleTextAreaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -100,7 +101,8 @@ export default function PostForm() {
 				const { error } = await registerResponse.json();
 				toast.error(error);
 			}
-			refreshData(pathName);
+			fetchAllPost();
+			refreshData();
 		} catch (error) {
 			console.error(error);
 			toast.error('Post failed');
