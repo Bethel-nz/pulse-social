@@ -3,6 +3,7 @@ import '@/styles/globals.css';
 import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
+import { Analytics } from '@vercel/analytics/react';
 import Provider from './context/provider';
 
 const inter = Inter({
@@ -34,7 +35,10 @@ export default async function RootLayout({
 	return (
 		<html lang='en'>
 			<body className={`${inter.variable} h-dynamic bg-light`}>
-				<Provider>{children}</Provider>
+				<Provider>
+					{children}
+					<Analytics />
+				</Provider>
 			</body>
 		</html>
 	);
