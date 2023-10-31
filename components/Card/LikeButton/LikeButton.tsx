@@ -18,7 +18,7 @@ const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
 export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 	const [userLiked, setUserLiked] = useState(false);
 	const [likeCount, setLikeCount] = useState(heart.length);
-	const [processingLike, setProcessingLike] = useState(false);
+	const [hasClicked, setHasClicked] = useState(false);
 
 	const sendLike = async () => {
 		const res = await fetch(`${BASE_URL}/api/post/likePost`, {
@@ -29,30 +29,37 @@ export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 			},
 			body: JSON.stringify({ postId: postId }),
 		});
-		if (res.ok) {
-			setLikeCount((prevCount) => prevCount + 1);
-			return;
-		} else {
-			console.error('something went wrong!');
+		try {
+			if (res.ok) {
+				return console.log(`${postId} has been clicked`);
+			}
+		} catch (error) {
+			console.error(error);
 		}
 	};
-	const handleClick = () => {
-		setUserLiked((prev) => !prev);
+	const handleClick = async () => {
 		if (!userLiked) {
-			setLikeCount(likeCount + 1);
+			setUserLiked(true);
+			setLikeCount((prev) => prev + 1);
+			setHasClicked(true);
 		} else {
-			setLikeCount(heart.length);
+			setUserLiked(false);
+			setLikeCount((prev) => prev - 1);
+			setHasClicked(false);
 		}
-		sendLike();
+		await sendLike();
 	};
+
 	useEffect(() => {
 		const userFound = heart.find((like) => like.userId === userId);
 		if (userFound) {
-			setUserLiked(true);
+			if (!hasClicked) {
+				setUserLiked(true);
+			}
 		} else {
-			setUserLiked(false);
+			return setHasClicked(false);
 		}
-	}, [userId, heart, likeCount]);
+	}, [userId, heart, likeCount, hasClicked]);
 
 	return (
 		<button
