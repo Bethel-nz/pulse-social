@@ -1,4 +1,5 @@
 'use client';
+import { useBaseURL } from '@/hooks/useBaseUrl';
 import { Heart } from 'lucide-react';
 import { revalidatePath, revalidateTag } from 'next/cache';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -14,8 +15,8 @@ type likeButtonProps = {
 	postId: string;
 	userId: string;
 };
-const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
 export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
+	const BASE_URL = useBaseURL();
 	const [userLiked, setUserLiked] = useState(false);
 	const [likeCount] = useState(heart.length);
 
