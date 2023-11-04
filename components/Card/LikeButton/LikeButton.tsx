@@ -39,22 +39,21 @@ export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 	const handleClick = async () => {
 		if (!userLiked) {
 			setUserLiked(true);
+			setLikeCount((prev) => prev + 1);
 		} else {
 			setUserLiked(false);
-			setLikeCount((prev) => prev - 1);
+			setLikeCount(heart.length);
 		}
 		await sendLike();
 	};
 
 	useEffect(() => {
-		const userHasLiked = heart.some((item) => item.userId === userId);
-		setUserLiked(userHasLiked);
-		if (userHasLiked) {
-			setLikeCount((prev) => prev + 1);
+		if (likeCount >= 1) {
+			setUserLiked(true);
 		} else {
-			setLikeCount((prev) => prev - 1);
+			setUserLiked(false);
 		}
-	}, [heart, userId]);
+	}, [likeCount]);
 
 	return (
 		<button
@@ -66,7 +65,9 @@ export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 					className={` ${userLiked ? 'fill-slate-800 ' : ' fill-white'}`}
 				/>
 			</span>
-			<span>{likeCount <= 1 ? `${likeCount} like` : `${likeCount} likes`}</span>
+			<span>
+				{likeCount === 1 ? `${likeCount} like` : `${likeCount} likes`}
+			</span>
 		</button>
 	);
 };
