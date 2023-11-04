@@ -17,7 +17,7 @@ type likeButtonProps = {
 const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
 export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 	const [userLiked, setUserLiked] = useState(false);
-	const [likeCount, setLikeCount] = useState(heart.length);
+	const [likeCount] = useState(heart.length);
 
 	const sendLike = async () => {
 		const res = await fetch(`${BASE_URL}/api/post/likePost`, {
@@ -36,29 +36,16 @@ export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 			console.error(error);
 		}
 	};
-	const handleClick = async () => {
-		if (!userLiked) {
-			setUserLiked(true);
-			setLikeCount((prev) => prev + 1);
-		} else {
-			setUserLiked(false);
-			setLikeCount(heart.length);
-		}
-		await sendLike();
-	};
 
 	useEffect(() => {
-		if (likeCount >= 1) {
-			setUserLiked(true);
-		} else {
-			setUserLiked(false);
-		}
-	}, [likeCount]);
+		const userHasLiked = heart.some((item) => item.userId === userId);
+		setUserLiked(userHasLiked);
+	}, [heart, userId]);
 
 	return (
 		<button
 			className='flex gap-4 items-center border-gray-100 border-2 rounded-md py-2 px-4'
-			onClick={handleClick}
+			onClick={sendLike}
 		>
 			<span>
 				<Heart
