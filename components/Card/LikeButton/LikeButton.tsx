@@ -30,14 +30,7 @@ export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 		});
 		try {
 			if (res.ok) {
-				if (userLiked) {
-					setLikeCount((prev) => prev - 1);
-					setUserLiked(false);
-				} else {
-					// If user didn't like before, increment count by 1 and toggle userLiked
-					setLikeCount((prev) => prev + 1);
-					setUserLiked(true);
-				}
+				return;
 			}
 		} catch (error) {
 			console.error(error);
@@ -46,6 +39,14 @@ export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 
 	// Function to handle user's click on the like button
 	const handleClick = async () => {
+		if (userLiked) {
+			setLikeCount((prev) => prev - 1);
+			setUserLiked(false);
+		} else {
+			// If user didn't like before, increment count by 1 and toggle userLiked
+			setLikeCount((prev) => prev + 1);
+			setUserLiked(true);
+		}
 		await sendLike();
 	};
 
