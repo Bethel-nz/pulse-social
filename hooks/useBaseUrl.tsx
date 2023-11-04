@@ -5,7 +5,7 @@ export function useBaseURL() {
 
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
-			setBaseURL('https://pulse-social.vercel.app');
+			setBaseURL(window.location.origin);
 		} else {
 			if (process.env.BASE_URL) {
 				setBaseURL(process.env.BASE_URL);
