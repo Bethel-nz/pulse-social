@@ -18,7 +18,6 @@ const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
 export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 	const [userLiked, setUserLiked] = useState(false);
 	const [likeCount, setLikeCount] = useState(heart.length);
-	const [hasClicked, setHasClicked] = useState(false);
 
 	const sendLike = async () => {
 		const res = await fetch(`${BASE_URL}/api/post/likePost`, {
@@ -31,7 +30,7 @@ export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 		});
 		try {
 			if (res.ok) {
-				return console.log(`${postId} has been clicked`);
+				return;
 			}
 		} catch (error) {
 			console.error(error);
@@ -41,25 +40,20 @@ export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 		if (!userLiked) {
 			setUserLiked(true);
 			setLikeCount((prev) => prev + 1);
-			setHasClicked(true);
 		} else {
 			setUserLiked(false);
 			setLikeCount((prev) => prev - 1);
-			setHasClicked(false);
 		}
 		await sendLike();
 	};
 
 	useEffect(() => {
-		const userFound = heart.find((like) => like.userId === userId);
-		if (userFound) {
-			if (!hasClicked) {
-				setUserLiked(true);
-			}
+		if (likeCount >= 1) {
+			setUserLiked(true);
 		} else {
-			return setHasClicked(false);
+			setUserLiked(false);
 		}
-	}, [userId, heart, likeCount, hasClicked]);
+	}, [likeCount]);
 
 	return (
 		<button
@@ -68,12 +62,10 @@ export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 		>
 			<span>
 				<Heart
-					className={`border-transparent outline-none ${
-						userLiked ? 'fill-pink-500 ' : ' fill-white'
-					}`}
+					className={` ${userLiked ? 'fill-slate-800 ' : ' fill-white'}`}
 				/>
 			</span>
-			{likeCount} likes
+			<span>{likeCount <= 1 ? `${likeCount} like` : `${likeCount} likes`}</span>
 		</button>
 	);
 };

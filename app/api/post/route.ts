@@ -15,7 +15,6 @@ export const GET = async (req: Request) => {
 				createdAt: 'desc',
 			},
 		});
-		console.log(data);
 
 		revalidateTag('all-post');
 		return NextResponse.json(data);

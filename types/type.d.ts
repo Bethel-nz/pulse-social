@@ -5,7 +5,6 @@ export type Props = {
 };
 
 export type Post = {
-	find: any;
 	id: string;
 	createdAt: string;
 	updatedAt: string;

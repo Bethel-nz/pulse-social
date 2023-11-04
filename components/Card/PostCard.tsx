@@ -48,9 +48,7 @@ export default function PostCard({ post }: prop) {
 							<MessageCircle />
 						</span>
 						<Link href={`/posts/${post.id}`}>
-							{post.comments.length <= 1
-								? `${post.comments.length} comments`
-								: `${post.comments} comments`}
+							{`${post.comments.length} comments`}
 						</Link>
 					</span>
 				</div>

@@ -38,6 +38,7 @@ export const POST = async (req: Request, res: Response) => {
 				email: email,
 			},
 		});
+		console.log(user);
 		if (!user) return null;
 		const result = await prisma?.post.create({
 			data: {
@@ -47,7 +48,6 @@ export const POST = async (req: Request, res: Response) => {
 				userId: user.id,
 			},
 		});
-		console.log(result);
 		revalidateTag('all-post');
 		return NextResponse.json({ message: result });
 	} catch (err) {

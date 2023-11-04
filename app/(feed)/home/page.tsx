@@ -4,11 +4,8 @@ import { fetchAllPost } from '@/lib/utils/FetchAllPosts';
 import { Post } from '@/types/type';
 import PostCard from '@/components/Card/PostCard';
 import { StaggerWrapper } from '@/components/StaggerWrapper/StaggerWrapper';
-import Timer from '@/components/Timer/Timer';
 export default async function page() {
 	const data: Post[] = await fetchAllPost();
-
-	setTimeout(fetchAllPost, 1000);
 
 	return (
 		<div>
