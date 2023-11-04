@@ -50,7 +50,9 @@ export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 		>
 			<span>
 				<Heart
-					className={` ${userLiked ? 'fill-slate-800 ' : ' fill-white'}`}
+					className={` ${
+						userLiked || likeCount >= 1 ? 'fill-slate-800 ' : ' fill-white'
+					}`}
 				/>
 			</span>
 			<span>
