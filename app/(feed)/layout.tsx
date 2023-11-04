@@ -11,7 +11,6 @@ export default function layout({ children }: Props) {
 			<Navbar />
 			<Toaster />
 			<main className='mt-6 w-96 md:w-[32em]'>{children}</main>
-			<Timer />
 		</Wrapper>
 	);
 }
