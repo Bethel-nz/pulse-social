@@ -24,7 +24,7 @@ export const CommentForm = ({
 	const makeComment = async (e: FormEvent) => {
 		e.preventDefault();
 		if (comment.length >= 1) {
-			const res = await fetch(`${BASE_URL}/api/post/${postId}`, {
+			const res = await fetch(`${BASE_URL}/api/post/${postId}/create`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -37,14 +37,14 @@ export const CommentForm = ({
 				return;
 			}
 		}
-		toast.error('you cant make empty comments');
+		toast.error(`you can't make empty comments`);
 	};
 
 	return (
 		<form className='bg-transparent rounded-md flex' onSubmit={makeComment}>
 			<input
 				type='text'
-				className='w-full bg-gray-200/20 text-gray-500 shadow-sm border-2 border-slate-900/50 resize-none h-8 md:h-12 rounded-md p-2 font-semibold'
+				className='w-full bg-gray-200/20 text-gray-500 shadow-sm border-2 border-slate-900/80 h-12 rounded-md p-3 font-semibold outline-transparent focus:border-slate-900'
 				onChange={(e) => setComment(e.target.value)}
 			/>
 			<button

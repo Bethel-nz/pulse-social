@@ -17,7 +17,6 @@ export const POST = async (req: Request, res: Response) => {
 	try {
 		const data: Data = await req.json();
 		const { post, imageUrl, videoUrl } = data;
-		console.log(data);
 		const email = session && session.user?.email;
 
 		if (!session) {
@@ -38,7 +37,6 @@ export const POST = async (req: Request, res: Response) => {
 				email: email,
 			},
 		});
-		console.log(user);
 		if (!user) return null;
 		const result = await prisma?.post.create({
 			data: {
