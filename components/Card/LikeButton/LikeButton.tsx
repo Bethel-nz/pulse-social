@@ -13,6 +13,14 @@ type likeButtonProps = {
 	postId: string;
 	userId: string;
 };
+/**
+ * Represents a button for liking a post.
+ *
+ * @param {Array} heart - An array of objects representing the likes for the post. Each object has properties `id`, `postId`, and `userId`.
+ * @param {string} postId - The ID of the post.
+ * @param {string} userId - The ID of the user.
+ * @returns {JSX.Element} - The rendered button component.
+ */
 export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 	const BASE_URL = useBaseURL();
 	const [userLiked, setUserLiked] = useState(false);
@@ -45,7 +53,7 @@ export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 
 	return (
 		<button
-			className='flex gap-4 items-center border-gray-100 border-2 rounded-md py-2 px-4'
+			className='flex items-center gap-4 px-4 py-2 border-2 border-gray-100 rounded-md'
 			onClick={sendLike}
 		>
 			<span>

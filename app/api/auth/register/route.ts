@@ -2,6 +2,12 @@ import prisma from '@/lib/prisma';
 import { hash } from 'bcrypt';
 import { NextResponse } from 'next/server';
 
+/**
+ * Handles a POST request to create a new user.
+ *
+ * @param req - The request object containing the user data in the request body.
+ * @returns A JSON response with the created user's data or an error message.
+ */
 export async function POST(req: Request) {
 	try {
 		const body = await req.json();

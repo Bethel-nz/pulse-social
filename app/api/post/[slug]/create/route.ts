@@ -10,7 +10,28 @@ type Data = {
 	postId: string;
 };
 
-export const POST = async (req: Request, res: Response) => {
+/**
+ * Handles a POST request to create a new comment.
+ *
+ * @param req - The request object containing the HTTP request information.
+ * @param res - The response object used to send the HTTP response.
+ * @returns A JSON response with a message indicating the result of the operation.
+ * @throws If there is an error during the process.
+ *
+ * @example
+ * // Send a POST request to create a new comment
+ * const response = await fetch('/api/post', {
+ *   method: 'POST',
+ *   body: JSON.stringify({
+ *     comment: 'Great post!',
+ *     postId: '12345',
+ *   }),
+ * });
+ * const data = await response.json();
+ * console.log(data);
+ * // Output: { message: 'Comment created successfully' }
+ */
+export const POST = async (req: Request) => {
 	const session = await getServerSession(authOptions);
 	try {
 		const data: Data = await req.json();

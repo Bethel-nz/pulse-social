@@ -3,6 +3,16 @@ import { revalidateTag } from 'next/cache';
 import { NextResponse } from 'next/server';
 
 export const revalidate = 1;
+/**
+ * Retrieves data from a database using Prisma.
+ * Includes the user, comments, and hearts related to each post.
+ * Orders the posts by their creation date.
+ * Revalidates the cache with the tag 'all-post'.
+ * Returns the retrieved data as a JSON response.
+ *
+ * @param req - The request object containing information about the HTTP request.
+ * @returns The retrieved data from the database as a JSON response.
+ */
 export const GET = async (req: Request) => {
 	try {
 		const data = await prisma?.post.findMany({

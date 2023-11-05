@@ -12,7 +12,13 @@ type Data = {
 	userId?: string;
 };
 
-export const POST = async (req: Request, res: Response) => {
+/**
+ * Handles a POST request by creating a new post in the database.
+ *
+ * @param req - The request object containing the POST data.
+ * @returns A JSON response indicating the success or failure of the post creation.
+ */
+export const POST = async (req: Request) => {
 	const session = await getServerSession(authOptions);
 	try {
 		const data: Data = await req.json();

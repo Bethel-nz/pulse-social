@@ -96,7 +96,7 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 	return (
 		<form
 			onSubmit={handleFormSubmit}
-			className='flex flex-col space-y-4 bg-gray-50 px-4 py-8 sm:px-16 relative'
+			className='relative flex flex-col px-4 py-8 space-y-4 bg-gray-50 sm:px-16'
 		>
 			{type === 'register' && (
 				<>
@@ -115,7 +115,7 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 							required
 							value={name}
 							onChange={(e) => setName(e.target.value)}
-							className='mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm'
+							className='block w-full px-3 py-2 mt-1 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:border-black focus:outline-none focus:ring-black sm:text-sm'
 						/>
 					</div>
 					<div className='relative mt-2'>
@@ -139,13 +139,11 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 									setImagePreview
 								);
 							}}
-							className='mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm file:mr-4 file:px-4 file:py-2 file:text-sm file:border-0
-            file:rounded-full file:font-semibold file:text-black file:bg-gray-200
-            hover:file:bg-black hover:file:text-gray-200 hover:file:cursor-pointer'
+							className='block w-full px-3 py-2 mt-1 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:border-black focus:outline-none focus:ring-black sm:text-sm file:mr-4 file:px-4 file:py-2 file:text-sm file:border-0 file:rounded-full file:font-semibold file:text-black file:bg-gray-200 hover:file:bg-black hover:file:text-gray-200 hover:file:cursor-pointer'
 						/>
 						<div>
 							{imagePreview && (
-								<div className='absolute right-0 translate-y-1/2 top-0 mt-4 ml-2 w-10'>
+								<div className='absolute top-0 right-0 w-10 mt-4 ml-2 translate-y-1/2'>
 									<Image
 										src={imagePreview}
 										alt='chosen'
@@ -157,7 +155,7 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 							)}
 						</div>
 					</div>
-					<div className='border w-full rounded-md' />
+					<div className='w-full border rounded-md' />
 				</>
 			)}
 
@@ -177,7 +175,7 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 					required
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
-					className='mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm'
+					className='block w-full px-3 py-2 mt-1 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:border-black focus:outline-none focus:ring-black sm:text-sm'
 				/>
 			</div>
 
@@ -197,12 +195,12 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 						required
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
-						className='mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm pr-10'
+						className='block w-full px-3 py-2 pr-10 mt-1 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:border-black focus:outline-none focus:ring-black sm:text-sm'
 					/>
 					<button
 						type='button'
 						onClick={togglePasswordVisibility}
-						className='absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer'
+						className='absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer'
 					>
 						{showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
 					</button>
@@ -224,7 +222,7 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 				)}
 			</button>
 			{type === 'login' ? (
-				<p className='text-center text-sm text-gray-600'>
+				<p className='text-sm text-center text-gray-600'>
 					Don&apos;t have an account?{' '}
 					<Link href='/register' className='font-semibold text-gray-800'>
 						Sign up
@@ -232,7 +230,7 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 					for free.
 				</p>
 			) : (
-				<p className='text-center text-sm text-gray-600'>
+				<p className='text-sm text-center text-gray-600'>
 					Already have an account?{' '}
 					<Link href='/login' className='font-semibold text-gray-800'>
 						Sign in

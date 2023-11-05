@@ -12,11 +12,17 @@ import { LikeButton } from './LikeButton/LikeButton';
 type prop = {
 	post: Post;
 };
+/**
+ * Renders a post card with user information, content, image or video, like button, and comment count.
+ *
+ * @param {object} post - The post object containing user information, creation date, content, image, video, hearts, and comments.
+ * @returns {JSX.Element} - Rendered HTML representing the post card.
+ */
 export default function PostCard({ post }: prop) {
 	return (
 		<>
-			<article className='bg-white text-gray-900 font-semibold p-4 border-2 rounded-md mt-4 shadow-md'>
-				<div className='flex justify-between items-center text-gray-950 '>
+			<article className='p-4 mt-4 font-semibold text-gray-900 bg-white border-2 rounded-md shadow-md'>
+				<div className='flex items-center justify-between text-gray-950 '>
 					<div className='flex items-center'>
 						<span>
 							<Userprofile
@@ -26,7 +32,7 @@ export default function PostCard({ post }: prop) {
 						</span>
 						<span className='ml-2'>{post.user.name}</span>
 					</div>
-					<span className='font-semibold text-sm'>
+					<span className='text-sm font-semibold'>
 						{formatDate(post.createdAt)}
 					</span>
 				</div>
@@ -37,13 +43,13 @@ export default function PostCard({ post }: prop) {
 					{post.video && <VideoPlayer src={post.video} />}
 				</div>
 				<div className='w-full h-[0.10em] bg-gray-200 mt-4' />
-				<div className='flex mt-5 mx-auto justify-between'>
+				<div className='flex justify-between mx-auto mt-5'>
 					<LikeButton
 						heart={post.hearts}
 						postId={post.id}
 						userId={post.user.id}
 					/>
-					<span className='flex gap-4 items-center'>
+					<span className='flex items-center gap-4'>
 						<span>
 							<MessageCircle />
 						</span>

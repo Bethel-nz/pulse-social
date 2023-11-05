@@ -1,9 +1,11 @@
 'use client';
+import React, { FormEvent, useState } from 'react';
+
+import { useRouter } from 'next/navigation';
+
 import { useBaseURL } from '@/hooks/useBaseUrl';
 import { FetchComments } from '@/lib/utils/FetchComments';
 import { Send } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import React, { FormEvent, useState } from 'react';
 import toast from 'react-hot-toast';
 
 export const CommentForm = ({
@@ -40,7 +42,6 @@ export const CommentForm = ({
 				setComment('');
 			} catch (error) {
 				console.error('Error posting comment:', error);
-				// Here you could also set some state to show an error message to the user
 			}
 		} else {
 			toast.error(`you can't make empty comments`);
@@ -53,16 +54,16 @@ export const CommentForm = ({
 	};
 
 	return (
-		<form className='bg-transparent rounded-md flex' onSubmit={makeComment}>
+		<form className='flex bg-transparent rounded-md' onSubmit={makeComment}>
 			<input
 				type='text'
-				className='w-full bg-gray-200/20 text-gray-500 shadow-sm border-2 border-slate-900/80 h-12 rounded-md p-3 font-semibold outline-transparent focus:border-slate-900'
+				className='w-full h-12 p-3 font-semibold text-gray-500 border-2 rounded-md shadow-sm bg-gray-200/20 border-slate-900/80 outline-transparent focus:border-slate-900'
 				onChange={(e) => setComment(e.target.value)}
 				onKeyDown={handleKeyDown}
 			/>
 			<button
 				type='submit'
-				className='bg-slate-900 text-white p-3 rounded-md ml-4 shadow-sm hover:bg-slate-700'
+				className='p-3 ml-4 text-white rounded-md shadow-sm bg-slate-900 hover:bg-slate-700'
 			>
 				<Send />
 			</button>

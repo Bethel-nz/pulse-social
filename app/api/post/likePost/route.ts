@@ -3,6 +3,12 @@ import prisma from 'prisma/client';
 import { authOptions } from '../../auth/[...nextauth]/route';
 import { NextResponse } from 'next/server';
 
+/**
+ * Handles a POST request to like or unlike a post.
+ *
+ * @param {Request} req - The request object containing the method and body of the request.
+ * @returns {Promise<object>} - The result of the like operation, either the created or deleted heart record.
+ */
 export const POST = async (req: Request) => {
 	const session = await getServerSession(authOptions);
 	const email = session!.user?.email;
