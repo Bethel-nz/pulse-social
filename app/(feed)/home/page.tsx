@@ -6,7 +6,6 @@ import PostCard from '@/components/Card/PostCard';
 import { StaggerWrapper } from '@/components/StaggerWrapper/StaggerWrapper';
 export default async function page() {
 	const data: Post[] = await fetchAllPost();
-
 	return (
 		<div>
 			<section>
