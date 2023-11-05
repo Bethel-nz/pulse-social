@@ -23,21 +23,33 @@ export const CommentForm = ({
 
 	const makeComment = async (e: FormEvent) => {
 		e.preventDefault();
-		if (comment.length >= 1) {
-			const res = await fetch(`${BASE_URL}/api/post/${postId}/create`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ comment, postId }),
-			});
-			FetchComments(slug);
-			refreshData();
-			if (res.ok) {
-				return;
+		if (comment.length > 0) {
+			try {
+				const res = await fetch(`${BASE_URL}/api/post/${postId}/create`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({ comment, postId }),
+				});
+				if (!res.ok) {
+					throw new Error(`Server responded with status code ${res.status}`);
+				}
+				FetchComments(slug);
+				refreshData();
+				setComment('');
+			} catch (error) {
+				console.error('Error posting comment:', error);
+				// Here you could also set some state to show an error message to the user
 			}
+		} else {
+			toast.error(`you can't make empty comments`);
 		}
-		toast.error(`you can't make empty comments`);
+	};
+	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === 'Enter') {
+			makeComment(e);
+		}
 	};
 
 	return (
@@ -46,11 +58,11 @@ export const CommentForm = ({
 				type='text'
 				className='w-full bg-gray-200/20 text-gray-500 shadow-sm border-2 border-slate-900/80 h-12 rounded-md p-3 font-semibold outline-transparent focus:border-slate-900'
 				onChange={(e) => setComment(e.target.value)}
+				onKeyDown={handleKeyDown}
 			/>
 			<button
 				type='submit'
 				className='bg-slate-900 text-white p-3 rounded-md ml-4 shadow-sm hover:bg-slate-700'
-				onClick={() => setComment('')}
 			>
 				<Send />
 			</button>
