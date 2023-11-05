@@ -1,9 +1,7 @@
 'use client';
 import { useBaseURL } from '@/hooks/useBaseUrl';
 import { Heart } from 'lucide-react';
-import { revalidatePath, revalidateTag } from 'next/cache';
-import React, { useCallback, useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
+import React, { useEffect, useState } from 'react';
 
 type heart = {
 	id: string;
@@ -32,9 +30,11 @@ export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 		try {
 			if (res.ok) {
 				return;
+			} else {
+				throw new Error(`Server responded with status code ${res.status}`);
 			}
 		} catch (error) {
-			console.error(error);
+			console.error('Error liking post:', error);
 		}
 	};
 
