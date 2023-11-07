@@ -1,38 +1,4 @@
-import { Post } from '@/types/type';
-
-type UserData = {
-	id: string;
-	name: string;
-	email: string;
-	image: string;
-	banner: string | null;
-	posts: {
-		id: string;
-		createdAt: string;
-		updatedAt: string;
-		content: string;
-		image: string | null;
-		video: string | null;
-		published: boolean;
-		userId: string;
-	}[];
-	comments: {
-		createdAt: string;
-		id: string;
-		title: string;
-		postId: string;
-		userId: string;
-		user: {
-			id: string;
-			name: string;
-			email: string;
-			password: string;
-			image: string;
-			banner: string | null;
-			role: string;
-		};
-	}[];
-};
+import { UserData } from '@/types';
 
 export const fetchUserProfile = async (arg: string) => {
 	const BASE_URL = process.env.BASE_URL;

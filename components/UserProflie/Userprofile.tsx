@@ -1,12 +1,8 @@
+import { UserProfileprops } from '@/types';
 import Image from 'next/image';
 import React from 'react';
 
-type props = {
-	src: string;
-	username: string;
-	size?: string;
-};
-export default function Userprofile({ src, username, size }: props) {
+export default function Userprofile({ src, username, size }: UserProfileprops) {
 	return (
 		<>
 			<Image

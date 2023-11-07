@@ -1,7 +1,7 @@
 import PostForm from '@/components/post-form/PostForm';
 import React from 'react';
 import { fetchAllPost } from '@/lib/utils/FetchAllPosts';
-import { Post } from '@/types/type';
+import { Post } from '@/types';
 import PostCard from '@/components/Card/PostCard';
 import { StaggerWrapper } from '@/components/StaggerWrapper/StaggerWrapper';
 export default async function page() {

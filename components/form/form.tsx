@@ -67,7 +67,7 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 					const imageUrl = uploadedImageData.secure_url;
 					const registerData = { name, email, password, image: imageUrl };
 					const registerResponse = await fetch(
-						`${BASE_URL}/api/auth/register`,
+						`${BASE_URL}/api/auth/auth/register`,
 						{
 							method: 'POST',
 							body: JSON.stringify(registerData),
@@ -76,7 +76,7 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 					if (registerResponse.ok) {
 						toast.success('Account created! Redirecting to login...');
 						setTimeout(() => {
-							router.push('/login');
+							router.push('/auth/login');
 						}, 2000);
 					} else {
 						const { error } = await registerResponse.json();
@@ -224,7 +224,7 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 			{type === 'login' ? (
 				<p className='text-sm text-center text-gray-600'>
 					Don&apos;t have an account?{' '}
-					<Link href='/register' className='font-semibold text-gray-800'>
+					<Link href='/auth/register' className='font-semibold text-gray-800'>
 						Sign up
 					</Link>{' '}
 					for free.
@@ -232,7 +232,7 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 			) : (
 				<p className='text-sm text-center text-gray-600'>
 					Already have an account?{' '}
-					<Link href='/login' className='font-semibold text-gray-800'>
+					<Link href='/auth/login' className='font-semibold text-gray-800'>
 						Sign in
 					</Link>{' '}
 					instead.

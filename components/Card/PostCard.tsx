@@ -1,5 +1,5 @@
 'use client';
-import { Post } from '@/types/type';
+import { Post } from '@/types';
 import React from 'react';
 import { formatDate } from '@/lib/formatDate';
 import VideoPlayer from '@/components/VideoPlayer/VideoPlayer';

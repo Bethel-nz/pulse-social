@@ -1,12 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
+import { ImageViewprops } from '@/types';
 
-type props = {
-	src: string;
-	alt: string;
-};
-
-export default function ImageView({ src, alt }: props) {
+export default function ImageView({ src, alt }: ImageViewprops) {
 	return (
 		<>
 			<Image

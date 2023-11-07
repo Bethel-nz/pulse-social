@@ -1,18 +1,9 @@
 'use client';
 import { useBaseURL } from '@/hooks/useBaseUrl';
+import { likeButtonProps } from '@/types';
 import { Heart } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 
-type heart = {
-	id: string;
-	postId: string;
-	userId: string;
-};
-type likeButtonProps = {
-	heart: heart[];
-	postId: string;
-	userId: string;
-};
 /**
  * Represents a button for liking a post.
  *

@@ -1,12 +1,9 @@
 'use client';
 import React, { ReactNode, Key } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { staggerProps } from '@/types';
 
-type props = {
-	children: ReactNode;
-	index: number;
-};
-export function StaggerWrapper({ children, index }: props) {
+export function StaggerWrapper({ children, index }: staggerProps) {
 	return (
 		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
 			<AnimatePresence>

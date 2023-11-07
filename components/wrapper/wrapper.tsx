@@ -1,5 +1,5 @@
 import React from 'react';
-import { Props } from '@/types/type';
+import { Props } from '@/types';
 
 export default function Wrapper({ children }: Props) {
 	return (

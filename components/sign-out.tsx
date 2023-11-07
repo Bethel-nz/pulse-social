@@ -4,7 +4,7 @@ import { signOut } from 'next-auth/react';
 export default function SignOut() {
 	const SignOut = () => {
 		const BASE_URL = window.location.origin;
-		signOut({ callbackUrl: `${BASE_URL}/login` });
+		signOut({ callbackUrl: `${BASE_URL}/auth/login` });
 	};
 	return (
 		<button

@@ -9,7 +9,7 @@ export default function Home() {
 	const { data: session } = useSession();
 	useEffect(() => {
 		setTimeout(() => {
-			!session ? router.push('/login') : router.push('/home');
+			!session ? router.push('/auth/login') : router.push('/home');
 		}, 1500);
 	});
 	return (

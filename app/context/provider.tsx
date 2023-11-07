@@ -1,6 +1,6 @@
 'use client';
 import { SessionProvider } from 'next-auth/react';
-import { Props } from '@/types/type';
+import { Props } from '@/types';
 
 /**
  * React component that wraps its children with a SessionProvider component from the next-auth/react library.

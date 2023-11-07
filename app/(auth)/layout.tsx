@@ -1,14 +1,5 @@
-import { Toaster } from 'react-hot-toast';
-import { ReactNode } from 'react';
-type Props = {
-	children: ReactNode;
-};
+import { Props } from '@/types';
 
 export default function Layout({ children }: Props) {
-	return (
-		<>
-			<Toaster />
-			{children}
-		</>
-	);
+	return <>{children}</>;
 }

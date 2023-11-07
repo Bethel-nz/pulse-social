@@ -1,4 +1,4 @@
-import { Post } from '@/types/type';
+import { Post } from '@/types';
 
 export const fetchAllPost = async () => {
 	const BASE_URL = process.env.BASE_URL;

@@ -1,7 +1,7 @@
 import { fetchUserProfile } from '@/lib/utils/FetchUserProfile';
 import PostForm from '@/components/post-form/PostForm';
 import Image from 'next/image';
-import { Post } from '@/types/type';
+import { Post } from '@/types';
 import PostCard from '@/components/Card/PostCard';
 import { StaggerWrapper } from '@/components/StaggerWrapper/StaggerWrapper';
 import Userprofile from '@/components/UserProflie/Userprofile';
