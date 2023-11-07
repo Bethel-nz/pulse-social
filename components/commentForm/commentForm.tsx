@@ -38,8 +38,8 @@ export const CommentForm = ({
 				setTimeout(() => {
 					setComment('');
 					FetchComments(slug);
-					refreshData();
 				}, 500);
+				refreshData();
 			} catch (error) {
 				console.error('Error posting comment:', error);
 			}
