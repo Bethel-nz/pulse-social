@@ -33,11 +33,8 @@ export default async function Page({ params: { user } }: Params) {
 	const postCount = data.posts.length;
 	return (
 		<>
-			<div className='mb-2'>
-				<BackButton />
-			</div>
 			<div>
-				<section className='mb-4 w-96 md:w-[32em] rounded-md p-2 shadow-lg pt-4 border flex flex-col items-center justify-center'>
+				<section className='mb-4 w-96 relative md:w-[32em] rounded-md p-2 shadow-lg pt-4 border flex flex-col items-center justify-center'>
 					<Image
 						width={512}
 						height={512}
@@ -45,12 +42,15 @@ export default async function Page({ params: { user } }: Params) {
 						src={data.image}
 						alt={`${username}'s profile`}
 					/>
+					<div className='absolute top-0 left-0 m-2 shadow-xl'>
+						<BackButton />
+					</div>
 					<div className='mt-4'>
-						<div className='py-4 bg-black text-white px-4  text-sm rounded-full text-bold'>
+						<div className='px-4 py-4 text-sm text-white bg-black rounded-full text-bold'>
 							{data.name}
 						</div>
 					</div>
-					<div className='mt-2 text-center flex flex-col space-x-4'>
+					<div className='flex flex-col mt-2 space-x-4 text-center'>
 						<span>
 							mail: <span className='font-semibold'>{data.email}</span>
 						</span>

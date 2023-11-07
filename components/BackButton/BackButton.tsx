@@ -8,7 +8,7 @@ const BackButton = () => {
 	return (
 		<div>
 			<button
-				className='p-1 text-white text-md font-bold shadow-sm bg-slate-900 hover:bg-slate-700 rounded-full'
+				className='p-3 font-bold text-white rounded-md shadow-sm bg-slate-900 hover:bg-slate-700'
 				onClick={router.back}
 			>
 				<ChevronLeft />
