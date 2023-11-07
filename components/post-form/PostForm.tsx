@@ -72,7 +72,6 @@ export default function PostForm() {
 			const imageUrl: string = await uploadedImageData.secure_url;
 			const videoUrl: string = await uploadedVideoData.secure_url;
 			const data = { post, imageUrl, videoUrl };
-			console.log(data);
 			setTimeout(async () => {
 				const registerResponse = await fetch(`${BASE_URL}/api/post/create`, {
 					method: 'POST',
@@ -98,6 +97,7 @@ export default function PostForm() {
 					color: '#fff',
 				},
 			});
+			refreshData();
 			setTimeout(() => {
 				fetchAllPost();
 			}, 500);
@@ -105,7 +105,6 @@ export default function PostForm() {
 			console.error(error);
 			toast.error('Post failed');
 		}
-		refreshData();
 	};
 
 	return (
