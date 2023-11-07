@@ -17,6 +17,7 @@ export const CommentForm = ({
 }) => {
 	const BASE_URL = useBaseURL();
 	const [comment, setComment] = useState('');
+	const [text, setText] = useState('');
 
 	const router = useRouter();
 	const refreshData = () => {

@@ -21,7 +21,6 @@ export default function PostForm() {
 	const MAX_FILE_SIZE = 16 * 1024 * 1024;
 	const UPLOAD_PRESET = 'pulse-user';
 	const router = useRouter();
-	const pathName = usePathname();
 	const refreshData = () => {
 		router.refresh();
 	};
@@ -114,7 +113,7 @@ export default function PostForm() {
 			<form onSubmit={handleSubmit}>
 				<div className='mb-4'>
 					<textarea
-						className='w-full bg-gray-400/20 text-gray-500 shadow-sm border-gray-400 resize-none h-28 md:h-40 rounded-sm p-2 font-semibold '
+						className='w-full bg-gray-400/20 text-gray-500 shadow-sm border-gray-400 resize-none h-28 md:h-32 rounded-sm p-2 font-semibold '
 						value={post}
 						name='post'
 						placeholder={`What's on your mind ?`}
@@ -122,7 +121,7 @@ export default function PostForm() {
 					/>
 					<span className='flex text-xs text-gray-400 font-semibold'>
 						<span>{charCount}</span>
-						<span> /500</span>
+						<span>&nbsp;/&nbsp;500</span>
 					</span>
 				</div>
 				<div className='flex w-full items-center justify-between'>

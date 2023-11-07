@@ -23,15 +23,17 @@ export default function PostCard({ post }: prop) {
 		<>
 			<article className='p-4 mt-4 font-semibold text-gray-900 bg-white border-2 rounded-md shadow-md'>
 				<div className='flex items-center justify-between text-gray-950 '>
-					<div className='flex items-center'>
-						<span>
-							<Userprofile
-								src={`${post?.user?.image}`}
-								username={`${post?.user?.name}`}
-							/>
-						</span>
-						<span className='ml-2'>{post.user.name}</span>
-					</div>
+					<Link href={`/users/@${post.user.name}`}>
+						<div className='flex items-center'>
+							<span>
+								<Userprofile
+									src={`${post?.user?.image}`}
+									username={`${post?.user?.name}`}
+								/>
+							</span>
+							<span className='ml-2'>{post.user.name}</span>
+						</div>
+					</Link>
 					<span className='text-sm font-semibold'>
 						{formatDate(post.createdAt)}
 					</span>

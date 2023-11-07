@@ -3,12 +3,10 @@ import React from 'react';
 import { formatDate } from '@/lib/formatDate';
 import VideoPlayer from '@/components/VideoPlayer/VideoPlayer';
 import ImageView from '@/components/ImageView/ImageView';
-import { Heart, MessageCircle } from 'lucide-react';
-import Link from 'next/link';
 import Userprofile from '@/components/UserProflie/Userprofile';
-import { LikeButton } from '@/components/Card/LikeButton/LikeButton';
-import { Post } from '@/types/type';
 import { CommentForm } from '@/components/commentForm/commentForm';
+import { ChevronLeft } from 'lucide-react';
+import BackButton from '@/components/BackButton/BackButton';
 
 type Params = {
 	params: {
@@ -67,6 +65,9 @@ export default async function page({ params: { slug } }: Params) {
 	return (
 		<div>
 			<>
+				<div>
+					<BackButton />
+				</div>
 				<article className='bg-white text-gray-900 font-semibold p-4 border-2 rounded-md mt-4 shadow-md'>
 					<div className='flex justify-between items-center text-gray-950 '>
 						<div className='flex items-center'>
@@ -115,6 +116,7 @@ export default async function page({ params: { slug } }: Params) {
 									<span className='font-semibold mt-4 py-4 text-gray-600 ml-2'>
 										{comment.title}
 									</span>
+									<span></span>
 								</div>
 							))}
 						</div>

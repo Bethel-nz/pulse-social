@@ -4,10 +4,14 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import AuthStatus from '../auth-status';
 import Link from 'next/link';
+import { ProfileLink } from './ProfileLink';
+import { useSession } from 'next-auth/react';
 
 export default function Navbar() {
 	const [isScrolled, setIsScrolled] = useState(false);
 	const pathname = usePathname();
+	const { data: session } = useSession();
+	const username = session?.user?.name;
 
 	useEffect(() => {
 		const checkScroll = () => {
@@ -58,24 +62,17 @@ export default function Navbar() {
 						Home
 					</Link>
 				</li>
-				<li
-					className={` ${
-						pathname === '/profile'
-							? 'bg-black text-white border-2'
-							: 'bg-gray-200 text-black'
-					} inline-flex w-32 px-4 py-2 rounded-full font-semibold group`}
-				>
-					<Link
-						href={'/profile'}
-						prefetch={true}
-						className='inline-flex items-center w-full h-full gap-4'
+				<>
+					<li
+						className={` ${
+							pathname === `/users/@${username}`
+								? 'bg-black text-white border-2'
+								: 'bg-gray-200 text-black'
+						} inline-flex w-32 px-4 py-2 rounded-full font-semibold group`}
 					>
-						<span className=''>Profile</span>
-						<span className='ring-2 rounded-full ring-offset-2 ring-black'>
-							<AuthStatus />
-						</span>
-					</Link>
-				</li>
+						<ProfileLink />
+					</li>
+				</>
 			</ul>
 		</nav>
 	);
