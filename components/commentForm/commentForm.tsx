@@ -39,13 +39,13 @@ export const CommentForm = ({
 					setComment('');
 					FetchComments(slug);
 				}, 500);
-				refreshData();
 			} catch (error) {
 				console.error('Error posting comment:', error);
 			}
 		} else {
 			toast.error(`you can't make empty comments`);
 		}
+		refreshData();
 	};
 	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === 'Enter') {

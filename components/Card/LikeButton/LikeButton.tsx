@@ -32,10 +32,10 @@ export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 				},
 				body: JSON.stringify({ postId: postId }),
 			});
-			refreshData();
 		} catch (error) {
 			console.error('Error liking post:', error);
 		}
+		refreshData();
 	};
 
 	useEffect(() => {

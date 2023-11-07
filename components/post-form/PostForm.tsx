@@ -99,11 +99,11 @@ export default function PostForm() {
 			setTimeout(() => {
 				fetchAllPost();
 			}, 500);
-			refreshData();
 		} catch (error) {
 			console.error(error);
 			toast.error('Post failed');
 		}
+		refreshData();
 	};
 
 	return (
