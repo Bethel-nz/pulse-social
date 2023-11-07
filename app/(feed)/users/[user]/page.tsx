@@ -31,7 +31,6 @@ export default async function Page({ params: { user } }: Params) {
 	const username = user.split('%40')[1];
 	const data = await fetchUserProfile(username);
 	const postCount = data.posts.length;
-	console.log(postCount);
 	return (
 		<>
 			<div className='mb-2'>
