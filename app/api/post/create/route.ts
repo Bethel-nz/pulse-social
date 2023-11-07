@@ -24,6 +24,7 @@ export const POST = async (req: Request) => {
 		const data: Data = await req.json();
 		const { post, imageUrl, videoUrl } = data;
 		const email = session && session.user?.email;
+		console.log(imageUrl, videoUrl);
 
 		if (!session) {
 			return NextResponse.json({ message: 'You must be sign in' });
