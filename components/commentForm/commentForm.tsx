@@ -35,9 +35,11 @@ export const CommentForm = ({
 					},
 					body: JSON.stringify({ comment, postId }),
 				});
-				FetchComments(slug);
-				refreshData();
-				setComment('');
+				setTimeout(() => {
+					setComment('');
+					FetchComments(slug);
+					refreshData();
+				}, 500);
 			} catch (error) {
 				console.error('Error posting comment:', error);
 			}

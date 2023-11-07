@@ -96,8 +96,10 @@ export default function PostForm() {
 					color: '#fff',
 				},
 			});
-			fetchAllPost();
-			refreshData();
+			setTimeout(() => {
+				fetchAllPost();
+				refreshData();
+			}, 500);
 		} catch (error) {
 			console.error(error);
 			toast.error('Post failed');
