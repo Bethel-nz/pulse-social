@@ -7,6 +7,7 @@ import Userprofile from '@/components/UserProflie/Userprofile';
 import { CommentForm } from '@/components/commentForm/commentForm';
 import { ChevronLeft } from 'lucide-react';
 import BackButton from '@/components/BackButton/BackButton';
+import Link from 'next/link';
 
 type Params = {
 	params: {
@@ -68,18 +69,20 @@ export default async function page({ params: { slug } }: Params) {
 				<div>
 					<BackButton />
 				</div>
-				<article className='bg-white text-gray-900 font-semibold p-4 border-2 rounded-md mt-4 shadow-md'>
-					<div className='flex justify-between items-center text-gray-950 '>
-						<div className='flex items-center'>
-							<span>
-								<Userprofile
-									src={`${data?.user?.image}`}
-									username={`${data?.user?.name}`}
-								/>
-							</span>
-							<span className='ml-2'>{data.user.name}</span>
-						</div>
-						<span className='font-semibold text-sm'>
+				<article className='p-4 mt-4 font-semibold text-gray-900 bg-white border-2 rounded-md shadow-md'>
+					<div className='flex items-center justify-between text-gray-950 '>
+						<Link href={`/users/@${data.user.name}`}>
+							<div className='flex items-center'>
+								<span>
+									<Userprofile
+										src={`${data?.user?.image}`}
+										username={`${data?.user?.name}`}
+									/>
+								</span>
+								<span className='ml-2'>{data.user.name}</span>
+							</div>
+						</Link>
+						<span className='text-sm font-semibold'>
 							{formatDate(data.createdAt)}
 						</span>
 					</div>
@@ -95,25 +98,27 @@ export default async function page({ params: { slug } }: Params) {
 					</div>
 				</article>
 				{data.comments.length >= 1 && (
-					<div className=' shadow-lg rounded-md '>
-						<div className='  bg-white border-gray border-2 px-2 py-6 rounde-md mt-2'>
+					<div className='rounded-md shadow-lg '>
+						<div className='px-2 py-6 mt-2 bg-white border-2 border-gray rounde-md'>
 							{data.comments.map((comment) => (
 								<div key={comment.id} className='p-2 mt-2 border-2 shadow-md'>
-									<div className='flex justify-between items-center text-gray-950 py-3'>
-										<div className='flex gap-x-2 font-semibold'>
-											<span>
-												<Userprofile
-													src={`${comment?.user?.image}`}
-													username={`${comment?.user?.name}`}
-												/>
-											</span>
-											<span>{comment.user.name}</span>
-										</div>
-										<span className='font-semibold text-sm'>
+									<div className='flex items-center justify-between py-3 text-gray-950'>
+										<Link href={`/users/@${comment.user.name}`}>
+											<div className='flex font-semibold gap-x-2'>
+												<span>
+													<Userprofile
+														src={`${comment?.user?.image}`}
+														username={`${comment?.user?.name}`}
+													/>
+												</span>
+												<span>{comment.user.name}</span>
+											</div>
+										</Link>
+										<span className='text-sm font-semibold'>
 											{formatDate(comment.createdAt)}
 										</span>
 									</div>
-									<span className='font-semibold mt-4 py-4 text-gray-600 ml-2'>
+									<span className='py-4 mt-4 ml-2 font-semibold text-gray-600'>
 										{comment.title}
 									</span>
 									<span></span>
