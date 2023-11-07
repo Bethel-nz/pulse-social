@@ -1,4 +1,4 @@
-import prisma from '@/lib/prisma';
+import prisma from '@/prisma/client';
 import { hash } from 'bcrypt';
 import { NextResponse } from 'next/server';
 
