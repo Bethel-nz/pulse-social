@@ -80,26 +80,22 @@ export default function PostForm() {
 				},
 				body: JSON.stringify(data),
 			});
-			if (registerResponse.ok) {
-				setIsLoading(false);
-				setSelectedImage('');
-				setImagePreview('');
-				setVideoPreview('');
-				setSelectedVideo('');
-				setCharCount(0);
-				setPost('');
-				toast('New post submitted !', {
-					icon: '🔥',
-					style: {
-						borderRadius: '10px',
-						background: '#333',
-						color: '#fff',
-					},
-				});
-			} else {
-				const { error } = await registerResponse.json();
-				toast.error(error);
-			}
+
+			setIsLoading(false);
+			setSelectedImage('');
+			setImagePreview('');
+			setVideoPreview('');
+			setSelectedVideo('');
+			setCharCount(0);
+			setPost('');
+			toast('New post submitted !', {
+				icon: '🔥',
+				style: {
+					borderRadius: '10px',
+					background: '#333',
+					color: '#fff',
+				},
+			});
 			fetchAllPost();
 			refreshData();
 		} catch (error) {
@@ -113,21 +109,21 @@ export default function PostForm() {
 			<form onSubmit={handleSubmit}>
 				<div className='mb-4'>
 					<textarea
-						className='w-full bg-gray-400/20 text-gray-500 shadow-sm border-gray-400 resize-none h-28 md:h-32 rounded-sm p-2 font-semibold '
+						className='w-full p-2 font-semibold text-gray-500 border-gray-400 rounded-sm shadow-sm resize-none bg-gray-400/20 h-28 md:h-32 '
 						value={post}
 						name='post'
 						placeholder={`What's on your mind ?`}
 						onChange={handleTextAreaChange}
 					/>
-					<span className='flex text-xs text-gray-400 font-semibold'>
+					<span className='flex text-xs font-semibold text-gray-400'>
 						<span>{charCount}</span>
 						<span>&nbsp;/&nbsp;500</span>
 					</span>
 				</div>
-				<div className='flex w-full items-center justify-between'>
-					<div className=' flex gap-4'>
+				<div className='flex items-center justify-between w-full'>
+					<div className='flex gap-4 '>
 						<label
-							className='block text-gray-200 text-sm font-semibold bg-gray-900 rounded-md py-2 px-4 text-center cursor-pointer'
+							className='block px-4 py-2 text-sm font-semibold text-center text-gray-200 bg-gray-900 rounded-md cursor-pointer'
 							htmlFor='file'
 						>
 							<ImagePlus />
@@ -144,7 +140,7 @@ export default function PostForm() {
 							type='file'
 							name='video'
 							id='video'
-							className='w-full bg-gray-400/20 text-slate-900 shadow-sm border-gray-400 rounded-md p-2 mt-2 hidden'
+							className='hidden w-full p-2 mt-2 border-gray-400 rounded-md shadow-sm bg-gray-400/20 text-slate-900'
 							accept='video/*, video/mp4, video/x-m4v, video/webm'
 							max={16 * 1024 * 1024}
 							onChange={(e) => {
@@ -162,7 +158,7 @@ export default function PostForm() {
 							name='file'
 							accept='image/*'
 							max={16 * 1024 * 1024}
-							className='w-full bg-gray-300 text-gray-800 shadow-sm border-gray-400 rounded-md p-2 hidden'
+							className='hidden w-full p-2 text-gray-800 bg-gray-300 border-gray-400 rounded-md shadow-sm'
 							onChange={(e) => {
 								handleFileChange(
 									e,
@@ -190,9 +186,9 @@ export default function PostForm() {
 					</button>
 				</div>
 			</form>
-			<div className='mt-2 flex'>
+			<div className='flex mt-2'>
 				{imagePreview && (
-					<div className='h-32 w-32 border-2 rounded-md shadow-sm relative grid place-items-center group'>
+					<div className='relative grid w-32 h-32 border-2 rounded-md shadow-sm place-items-center group'>
 						<Image
 							src={imagePreview}
 							width={500}
@@ -203,7 +199,7 @@ export default function PostForm() {
 					</div>
 				)}
 				{videoPreview && (
-					<div className='h-32 w-32 border-2 rounded-md shadow-sm relative'>
+					<div className='relative w-32 h-32 border-2 rounded-md shadow-sm'>
 						<video
 							src={videoPreview}
 							width={500}

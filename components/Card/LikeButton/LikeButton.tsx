@@ -2,6 +2,7 @@
 import { useBaseURL } from '@/hooks/useBaseUrl';
 import { likeButtonProps } from '@/types';
 import { Heart } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 /**
@@ -16,22 +17,22 @@ export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 	const BASE_URL = useBaseURL();
 	const [userLiked, setUserLiked] = useState(false);
 	const [likeCount] = useState(heart.length);
+	const router = useRouter();
+	const refreshData = () => {
+		router.refresh();
+	};
 
 	const sendLike = async () => {
-		const res = await fetch(`${BASE_URL}/api/post/likePost`, {
-			cache: 'no-store',
-			method: 'POST',
-			headers: {
-				'Content-type': 'application/json',
-			},
-			body: JSON.stringify({ postId: postId }),
-		});
 		try {
-			if (res.ok) {
-				return;
-			} else {
-				throw new Error(`Server responded with status code ${res.status}`);
-			}
+			const res = await fetch(`${BASE_URL}/api/post/likePost`, {
+				cache: 'no-store',
+				method: 'POST',
+				headers: {
+					'Content-type': 'application/json',
+				},
+				body: JSON.stringify({ postId: postId }),
+			});
+			refreshData();
 		} catch (error) {
 			console.error('Error liking post:', error);
 		}

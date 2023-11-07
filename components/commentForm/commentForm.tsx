@@ -35,9 +35,6 @@ export const CommentForm = ({
 					},
 					body: JSON.stringify({ comment, postId }),
 				});
-				if (!res.ok) {
-					throw new Error(`Server responded with status code ${res.status}`);
-				}
 				FetchComments(slug);
 				refreshData();
 				setComment('');
