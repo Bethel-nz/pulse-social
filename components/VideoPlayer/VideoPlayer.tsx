@@ -46,15 +46,15 @@ export default function VideoPlayer({ src }: props) {
 	};
 	return (
 		<>
-			<div className='relative w-full h-full aspect-auto rounded-lg overflow-hidden mt-4 shadow-md shadow-gray-500 mx-auto'>
-				<div className='absolute top-4 right-4 z-10'>
+			<div className='relative w-[90%] aspect-auto rounded-lg overflow-hidden mt-4 shadow-md shadow-gray-500 mx-auto'>
+				<div className='absolute z-10 top-4 right-4'>
 					<VideoControls
 						progress={videoProgress}
 						isPaused={isPaused}
 						onPlayPause={togglePlayPause}
 					/>
 				</div>
-				<video className='w-full h-full object-contain' ref={videoRef} loop>
+				<video className='w-full' ref={videoRef} loop>
 					<source src={`${src}`} />
 				</video>
 			</div>

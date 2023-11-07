@@ -67,20 +67,21 @@ export default function PostForm() {
 					body: formDataVideo,
 				}
 			);
-
 			const uploadedImageData = await uploadImage.json();
 			const uploadedVideoData = await uploadVideo.json();
-			const imageUrl: string = uploadedImageData.secure_url;
-			const videoUrl: string = uploadedVideoData.secure_url;
+			const imageUrl: string = await uploadedImageData.secure_url;
+			const videoUrl: string = await uploadedVideoData.secure_url;
 			const data = { post, imageUrl, videoUrl };
-			console.log(data)
-			const registerResponse = await fetch(`${BASE_URL}/api/post/create`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(data),
-			});
+			console.log(data);
+			setTimeout(async () => {
+				const registerResponse = await fetch(`${BASE_URL}/api/post/create`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(data),
+				});
+			}, 500);
 
 			setIsLoading(false);
 			setSelectedImage('');
