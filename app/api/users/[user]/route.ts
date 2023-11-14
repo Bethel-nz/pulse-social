@@ -19,6 +19,7 @@ export const GET = async (req: Request, { params: { user } }: Params) => {
 						createdAt: 'desc',
 					},
 					include: {
+						hearts: true,
 						comments: true,
 					},
 				},

@@ -23,7 +23,7 @@ type post = {
 	content: string;
 	image: string | null;
 	video: string | null;
-	published: boolean;
+	published?: boolean;
 	userId: string;
 };
 

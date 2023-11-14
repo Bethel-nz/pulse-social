@@ -1,5 +1,6 @@
 'use client';
 import { signOut } from 'next-auth/react';
+import { LogOut } from 'lucide-react';
 
 export default function SignOut() {
 	const SignOut = () => {
@@ -8,10 +9,11 @@ export default function SignOut() {
 	};
 	return (
 		<button
-			className='text-stone-400 hover:text-stone-200 transition-all border-2 p-4 rounded-md'
+			className='flex gap-x-2 transition-all rounded-md text-slate-900 hover:text-slate-700 mx-auto hover:bg-gray-200 p-2 font-semibold'
 			onClick={SignOut}
 		>
-			sign out
+			<span>Sign Out</span>
+			<LogOut />
 		</button>
 	);
 }

@@ -4,6 +4,32 @@ export type Props = {
 	children: ReactNode;
 };
 
+type comments = {
+	createdAt: string;
+	id: string;
+	title: string;
+	postId: string;
+	userId: string;
+	user: {
+		id: string;
+		name: string;
+		email: string;
+		password: string;
+		image: string;
+		banner: string | null;
+		role: string;
+	};
+};
+type user = {
+	id: string;
+	name: string;
+	email: string;
+	password: string;
+	image: string;
+	banner: string | null;
+	role: string;
+};
+
 type heart = {
 	id: string;
 	postId: string;
@@ -18,18 +44,15 @@ export type Post = {
 	video: string;
 	published: boolean;
 	userId: string;
-	user: {
-		id: string;
-		name: string;
-		email: string;
-		password: string;
-		image: string;
-		banner: string | null;
-		role: string;
-	};
-	comments: string[];
+	user: User;
+	comments: comments[];
 	hearts: heart[];
 };
+
+type PostWithoutComment = Omit<
+	Post,
+	'comments' | 'published' | 'hearts' | 'user'
+>;
 
 export type UserData = {
 	id: string;
@@ -37,32 +60,8 @@ export type UserData = {
 	email: string;
 	image: string;
 	banner: string | null;
-	posts: {
-		id: string;
-		createdAt: string;
-		updatedAt: string;
-		content: string;
-		image: string | null;
-		video: string | null;
-		published: boolean;
-		userId: string;
-	}[];
-	comments: {
-		createdAt: string;
-		id: string;
-		title: string;
-		postId: string;
-		userId: string;
-		user: {
-			id: string;
-			name: string;
-			email: string;
-			password: string;
-			image: string;
-			banner: string | null;
-			role: string;
-		};
-	}[];
+	posts: PostWithoutComment[];
+	comments: comments[];
 };
 
 export type staggerProps = {
