@@ -23,6 +23,8 @@ export default function PostForm() {
 	const refreshData = () => {
 		router.refresh();
 	};
+	let videoUrl: string;
+	let imageUrl: string;
 
 	const handleTextAreaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		const value = e.target.value;
@@ -51,25 +53,31 @@ export default function PostForm() {
 				formDataVideo.append('upload_preset', UPLOAD_PRESET);
 			}
 
-			const uploadImage = await fetch(
-				'https://api.cloudinary.com/v1_1/pulse-app/image/upload',
-				{
-					method: 'POST',
-					body: formDataImage,
-				}
-			);
+			if (selectedImage) {
+				const uploadImage = await fetch(
+					'https://api.cloudinary.com/v1_1/pulse-app/image/upload',
+					{
+						method: 'POST',
+						body: formDataImage,
+					}
+				);
 
-			const uploadVideo = await fetch(
-				'https://api.cloudinary.com/v1_1/pulse-app/video/upload',
-				{
-					method: 'POST',
-					body: formDataVideo,
-				}
-			);
-			const uploadedImageData = await uploadImage.json();
-			const uploadedVideoData = await uploadVideo.json();
-			const imageUrl: string = await uploadedImageData.secure_url;
-			const videoUrl: string = await uploadedVideoData.secure_url;
+				const uploadedImageData = await uploadImage.json();
+				imageUrl = await uploadedImageData.secure_url;
+			}
+
+			if (selectedVideo) {
+				const uploadVideo = await fetch(
+					'https://api.cloudinary.com/v1_1/pulse-app/video/upload',
+					{
+						method: 'POST',
+						body: formDataVideo,
+					}
+				);
+				const uploadedVideoData = await uploadVideo.json();
+				videoUrl = await uploadedVideoData.secure_url;
+			}
+
 			const data = { post, imageUrl, videoUrl };
 			setTimeout(async () => {
 				const registerResponse = await fetch(
