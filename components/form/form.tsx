@@ -11,6 +11,7 @@ import { handleFileChange } from '@/lib/handleFileChange';
 
 export default function Form({ type }: { type: 'login' | 'register' }) {
 	const BASE_URL = process.env.BASE_URL;
+	console.log(BASE_URL);
 
 	const [loading, setLoading] = useState(false);
 	const [email, setEmail] = useState('');
@@ -54,6 +55,7 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 				const formData = new FormData();
 				formData.append('file', image);
 				formData.append('upload_preset', 'pulse-user');
+				console.log(formData);
 				const uploadResponse = await fetch(
 					'https://api.cloudinary.com/v1_1/pulse-app/image/upload',
 					{
@@ -66,7 +68,7 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 					const imageUrl = uploadedImageData.secure_url;
 					const registerData = { name, email, password, image: imageUrl };
 					const registerResponse = await fetch(
-						`${BASE_URL}/api/auth/auth/register`,
+						`https://pulse-social.vercel.app/api/auth/register`,
 						{
 							method: 'POST',
 							body: JSON.stringify(registerData),

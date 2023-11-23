@@ -27,13 +27,16 @@ export const CommentForm = ({
 		e.preventDefault();
 		if (comment.length > 0) {
 			try {
-				const res = await fetch(`${BASE_URL}/api/post/${postId}/create`, {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify({ comment, postId }),
-				});
+				const res = await fetch(
+					`https://pulse-social.vercel.app//api/post/${postId}/create`,
+					{
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify({ comment, postId }),
+					}
+				);
 				setTimeout(() => {
 					setComment('');
 					FetchComments(slug);
