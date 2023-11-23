@@ -36,7 +36,7 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 				email,
 				password,
 				redirect: false,
-				callbackUrl: BASE_URL,
+				callbackUrl: 'https://pulse-social.vercel.app/',
 			}).then((response) => {
 				const { ok, error } = response as SignInResponse;
 				if (ok) {
