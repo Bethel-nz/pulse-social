@@ -2,7 +2,7 @@ import { Post } from '@/types';
 
 export const fetchAllPost = async () => {
 	const BASE_URL = process.env.BASE_URL;
-	const response = await fetch(`${BASE_URL}/api/post`, {
+	const response = await fetch(`https://pulse-social.vercel.app/api/post`, {
 		cache: 'no-cache',
 		next: { tags: ['all-post'] },
 	});
