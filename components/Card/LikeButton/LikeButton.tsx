@@ -1,5 +1,4 @@
 'use client';
-import { useBaseURL } from '@/hooks/useBaseUrl';
 import { likeButtonProps } from '@/types';
 import { Heart } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -14,7 +13,7 @@ import React, { useEffect, useState } from 'react';
  * @returns {JSX.Element} - The rendered button component.
  */
 export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
-	const BASE_URL = useBaseURL();
+	const BASE_URL = process.env.BASE_URL;
 	const [userLiked, setUserLiked] = useState(false);
 	const [likeCount] = useState(heart.length);
 	const router = useRouter();

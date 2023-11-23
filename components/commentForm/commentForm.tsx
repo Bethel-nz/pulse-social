@@ -3,7 +3,6 @@ import React, { FormEvent, useState } from 'react';
 
 import { useRouter } from 'next/navigation';
 
-import { useBaseURL } from '@/hooks/useBaseUrl';
 import { FetchComments } from '@/lib/utils/FetchComments';
 import { Send } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -15,7 +14,7 @@ export const CommentForm = ({
 	postId: string;
 	slug: string;
 }) => {
-	const BASE_URL = useBaseURL();
+	const BASE_URL = process.env.BASE_URL;
 	const [comment, setComment] = useState('');
 	const [text, setText] = useState('');
 

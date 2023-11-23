@@ -8,10 +8,9 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Eye, EyeOff } from 'lucide-react';
 import { handleFileChange } from '@/lib/handleFileChange';
-import { useBaseURL } from '@/hooks/useBaseUrl';
 
 export default function Form({ type }: { type: 'login' | 'register' }) {
-	const BASE_URL = useBaseURL();
+	const BASE_URL = process.env.BASE_URL;
 
 	const [loading, setLoading] = useState(false);
 	const [email, setEmail] = useState('');
