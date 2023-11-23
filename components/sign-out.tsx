@@ -5,7 +5,7 @@ import { LogOut } from 'lucide-react';
 export default function SignOut() {
 	const SignOut = () => {
 		const BASE_URL = window.location.origin;
-		signOut({ callbackUrl: `https://pulse-social.vercel.app//auth/login` });
+		signOut({ callbackUrl: `${BASE_URL}/auth/login` });
 	};
 	return (
 		<button

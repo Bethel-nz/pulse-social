@@ -13,7 +13,7 @@ import React, { useEffect, useState } from 'react';
  * @returns {JSX.Element} - The rendered button component.
  */
 export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
-	const BASE_URL = process.env.BASE_URL;
+	const BASE_URL = process.env.NEXT_PULIC_BASE_URL;
 	const [userLiked, setUserLiked] = useState(false);
 	const [likeCount] = useState(heart.length);
 	const router = useRouter();
@@ -23,17 +23,14 @@ export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 
 	const sendLike = async () => {
 		try {
-			const res = await fetch(
-				`https://pulse-social.vercel.app//api/post/likePost`,
-				{
-					cache: 'no-store',
-					method: 'POST',
-					headers: {
-						'Content-type': 'application/json',
-					},
-					body: JSON.stringify({ postId: postId }),
-				}
-			);
+			const res = await fetch(`${BASE_URL}/api/post/likePost`, {
+				cache: 'no-store',
+				method: 'POST',
+				headers: {
+					'Content-type': 'application/json',
+				},
+				body: JSON.stringify({ postId: postId }),
+			});
 		} catch (error) {
 			console.error('Error liking post:', error);
 		}

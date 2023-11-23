@@ -9,7 +9,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { fetchAllPost } from '@/lib/utils/FetchAllPosts';
 
 export default function PostForm() {
-	const BASE_URL = process.env.BASE_URL;
+	const BASE_URL = process.env.NEXT_PULIC_BASE_URL;
 	const [post, setPost] = useState('');
 	const [charCount, setCharCount] = useState(0);
 	const [selectedImage, setSelectedImage] = useState<File | string>('');
@@ -72,16 +72,13 @@ export default function PostForm() {
 			const videoUrl: string = await uploadedVideoData.secure_url;
 			const data = { post, imageUrl, videoUrl };
 			setTimeout(async () => {
-				const registerResponse = await fetch(
-					`https://pulse-social.vercel.app//api/post/create`,
-					{
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json',
-						},
-						body: JSON.stringify(data),
-					}
-				);
+				const registerResponse = await fetch(`${BASE_URL}/api/post/create`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(data),
+				});
 			}, 500);
 
 			setIsLoading(false);

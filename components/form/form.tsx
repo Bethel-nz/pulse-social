@@ -10,8 +10,7 @@ import { Eye, EyeOff } from 'lucide-react';
 import { handleFileChange } from '@/lib/handleFileChange';
 
 export default function Form({ type }: { type: 'login' | 'register' }) {
-	const BASE_URL = process.env.BASE_URL;
-	console.log(BASE_URL);
+	const BASE_URL = process.env.NEXT_PULIC_BASE_URL;
 
 	const [loading, setLoading] = useState(false);
 	const [email, setEmail] = useState('');
@@ -36,7 +35,7 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 				email,
 				password,
 				redirect: false,
-				callbackUrl: 'https://pulse-social.vercel.app/',
+				callbackUrl: BASE_URL,
 			}).then((response) => {
 				const { ok, error } = response as SignInResponse;
 				if (ok) {
@@ -68,7 +67,7 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 					const imageUrl = uploadedImageData.secure_url;
 					const registerData = { name, email, password, image: imageUrl };
 					const registerResponse = await fetch(
-						`https://pulse-social.vercel.app/api/auth/register`,
+						`${BASE_URL}/api/auth/register`,
 						{
 							method: 'POST',
 							body: JSON.stringify(registerData),
