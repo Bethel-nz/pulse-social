@@ -17,7 +17,6 @@ model User {
   email    String    @unique
   password String
   image    String
-  banner   String?
   posts    Post[]
   comments Comment[]
   hearts   Heart[]

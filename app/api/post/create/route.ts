@@ -50,6 +50,7 @@ export const POST = async (req: Request) => {
 				video: videoUrl,
 				image: imageUrl,
 				userId: user.id,
+				published: true,
 			},
 		});
 		revalidateTag('all-post');
