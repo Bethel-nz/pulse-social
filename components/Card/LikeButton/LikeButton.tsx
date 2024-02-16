@@ -25,6 +25,7 @@ export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 		try {
 			await fetch(`https://pulse-social.vercel.app/api/post/likePost`, {
 				cache: 'no-store',
+				next: { revalidate: 1 },
 				method: 'POST',
 				headers: {
 					'Content-type': 'application/json',
