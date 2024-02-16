@@ -17,7 +17,7 @@ export default function Navbar() {
 
 	useEffect(() => {
 		const checkScroll = () => {
-			if (window.scrollY >= 20) {
+			if (window.scrollY >= 50) {
 				setIsScrolled(true);
 			} else {
 				setIsScrolled(false);
@@ -97,13 +97,13 @@ export default function Navbar() {
 					</div>
 					{showMenu && (
 						<AnimatePresence initial={false}>
-								<motion.div
-						initial={{ y: -50, opacity: 0 }}
-						animate={{ y: 0, opacity: 1 }}
-						exit={{ y: -50, opacity: 0 }}
-						transition={{ duration: 1, type: 'tween' }}
-						className={`absolute right-0 w-32 p-2 m-4 bg-white rounded-md shadow-lg -bottom-18 h-14`}
-					>
+							<motion.div
+								initial={{ y: -50, opacity: 0 }}
+								animate={{ y: 0, opacity: 1 }}
+								exit={{ y: -50, opacity: 0 }}
+								transition={{ duration: 1, type: 'tween' }}
+								className={`absolute right-0 w-32 p-2 m-4 bg-white rounded-md shadow-lg -bottom-18 h-14`}
+							>
 								<SignOut />
 							</motion.div>
 						</AnimatePresence>

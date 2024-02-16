@@ -9,6 +9,8 @@ import { ChevronLeft } from 'lucide-react';
 import BackButton from '@/components/BackButton/BackButton';
 import Link from 'next/link';
 
+export const revalidate = 1;
+
 type Params = {
 	params: {
 		slug: string;

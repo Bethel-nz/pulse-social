@@ -10,6 +10,7 @@ import ImageView from '@/components/ImageView/ImageView';
 import VideoPlayer from '@/components/VideoPlayer/VideoPlayer';
 import Link from 'next/link';
 import BackButton from '@/components/BackButton/BackButton';
+export const revalidate = 1;
 
 type Params = {
 	params: {
