@@ -17,7 +17,7 @@ export default function Navbar() {
 
 	useEffect(() => {
 		const checkScroll = () => {
-			if (window.scrollY >= 50) {
+			if (window.scrollY >= 20) {
 				setIsScrolled(true);
 			} else {
 				setIsScrolled(false);
