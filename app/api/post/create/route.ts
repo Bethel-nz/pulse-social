@@ -11,7 +11,7 @@ type Data = {
 	videoUrl?: string;
 	userId?: string;
 };
-
+export const revalidate = 1;
 /**
  * Handles a POST request by creating a new post in the database.
  *

@@ -4,6 +4,7 @@ import { fetchAllPost } from '@/lib/utils/FetchAllPosts';
 import { Post } from '@/types';
 import PostCard from '@/components/Card/PostCard';
 import { StaggerWrapper } from '@/components/StaggerWrapper/StaggerWrapper';
+export const revalidate = 1;
 export default async function page() {
 	const data: Post[] = await fetchAllPost();
 	return (

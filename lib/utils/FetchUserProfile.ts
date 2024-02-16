@@ -1,7 +1,6 @@
 import { UserData } from '@/types';
 
 export const fetchUserProfile = async (arg: string) => {
-	const BASE_URL = process.env.BASE_URL;
 	const response = await fetch(
 		`https://pulse-social.vercel.app/api/users/${arg}`,
 		{

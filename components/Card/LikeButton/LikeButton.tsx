@@ -23,17 +23,14 @@ export const LikeButton = ({ heart, postId, userId }: likeButtonProps) => {
 
 	const sendLike = async () => {
 		try {
-			const res = await fetch(
-				`https://pulse-social.vercel.app/api/post/likePost`,
-				{
-					cache: 'no-store',
-					method: 'POST',
-					headers: {
-						'Content-type': 'application/json',
-					},
-					body: JSON.stringify({ postId: postId }),
-				}
-			);
+			await fetch(`https://pulse-social.vercel.app/api/post/likePost`, {
+				cache: 'no-store',
+				method: 'POST',
+				headers: {
+					'Content-type': 'application/json',
+				},
+				body: JSON.stringify({ postId }),
+			});
 		} catch (error) {
 			console.error('Error liking post:', error);
 		}
