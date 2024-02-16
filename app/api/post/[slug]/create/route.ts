@@ -60,6 +60,7 @@ export const POST = async (req: Request) => {
 		});
 		return NextResponse.json({ message: result });
 	} catch (err) {
+		console.log('[SLUG]:', err);
 		return NextResponse.json({ message: err });
 	}
 };

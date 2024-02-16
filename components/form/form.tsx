@@ -45,7 +45,7 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 					}, 500);
 				} else {
 					console.error(error);
-					toast.error(`${error}`);
+					toast.error(`Invalid Credential Sign in`, { icon: '😢' });
 				}
 			});
 		} else {
@@ -54,7 +54,6 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 				const formData = new FormData();
 				formData.append('file', image);
 				formData.append('upload_preset', 'pulse-user');
-				console.log(formData);
 				const uploadResponse = await fetch(
 					'https://api.cloudinary.com/v1_1/pulse-app/image/upload',
 					{
@@ -74,20 +73,25 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
 						}
 					);
 					if (registerResponse.ok) {
-						toast.success('Account created! Redirecting to login...');
+						toast.success('Account created! Redirecting to login...', {
+							icon: '⚡',
+						});
 						setTimeout(() => {
 							router.push('/auth/login');
 						}, 2000);
 					} else {
 						const { error } = await registerResponse.json();
-						toast.error(error);
+						toast.error(`Couldn't Login User`);
+						console.log('[LOGIN-FORM]:', error);
 					}
 				} else {
 					toast.error('Please select an image.');
 				}
 			} catch (error) {
 				console.error(error);
-				toast.error('Unknown error');
+				toast.error('An Error Occured', {
+					icon: '😢',
+				});
 			}
 		}
 		setLoading(false);

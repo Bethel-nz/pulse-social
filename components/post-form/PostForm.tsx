@@ -99,13 +99,8 @@ export default function PostForm() {
 			setSelectedVideo('');
 			setCharCount(0);
 			setPost('');
-			toast('New post submitted !', {
-				icon: '🔥',
-				style: {
-					borderRadius: '10px',
-					background: '#333',
-					color: '#fff',
-				},
+			toast('Your Post has been pulsed ...', {
+				icon: '⚡',
 			});
 			refreshData();
 			setTimeout(() => {
@@ -113,7 +108,9 @@ export default function PostForm() {
 			}, 500);
 		} catch (error) {
 			console.error(error);
-			toast.error('Post failed');
+			toast.error('Creating New Post Failed....', {
+				icon: '😢',
+			});
 		}
 	};
 
