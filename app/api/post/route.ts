@@ -2,7 +2,6 @@ import prisma from '@/prisma/client';
 import { revalidateTag } from 'next/cache';
 import { NextResponse } from 'next/server';
 
-export const revalidate = 1;
 /**
  * Retrieves data from a database using Prisma.
  * Includes the user, comments, and hearts related to each post.
@@ -32,3 +31,5 @@ export const GET = async (req: Request) => {
 		return NextResponse.json({ error });
 	}
 };
+
+export const dynamic = 'force-dynamic';
