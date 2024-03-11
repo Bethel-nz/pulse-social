@@ -4,7 +4,7 @@ export const fetchUserProfile = async (arg: string) => {
 	const response = await fetch(
 		`https://pulse-social.vercel.app/api/users/${arg}`,
 		{
-			cache: 'no-cache',
+			cache: 'no-store',
 			next: {
 				revalidate: 1,
 			},
