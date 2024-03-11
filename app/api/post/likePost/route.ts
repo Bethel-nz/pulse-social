@@ -3,6 +3,7 @@ import prisma from 'prisma/client';
 import { authOptions } from '../../auth/[...nextauth]/route';
 import { NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic'
 /**
  * Handles a POST request to like or unlike a post.
  *
